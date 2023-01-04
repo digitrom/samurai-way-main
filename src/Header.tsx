@@ -1,11 +1,13 @@
 import React from "react";
 
-export function Header() {
+ const Header = () => {
     return (
         <div>
-            <a href="#s">Home</a>
-            <a href="#s">News Feed</a>
-            <a href="#s">Mesagges</a>
+            <a href="#s">Home</a> -
+            <a href="#s">News Feed</a> -
+            <a href="#s">Mesagges</a> -
         </div>
     );
 }
+
+export default Header;
