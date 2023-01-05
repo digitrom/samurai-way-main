@@ -1,11 +1,25 @@
 import React from 'react';
+import './Navbar.css';
 
 const Navbar = () => {
     return (
-        <header className='header'>
-            <img
-                src='https://www.adobe.com/express/create/media_127a4cd0c28c2753638768caf8967503d38d01e4c.jpeg?width=400&format=jpeg&optimize=medium'/>
-        </header>
+        <nav className='nav'>
+            <div className='item'>
+                <a>Profile</a>
+            </div>
+            <div className='item'>
+                <a>Messages</a>
+            </div>
+            <div className='item'>
+                <a>News</a>
+            </div>
+            <div className='item'>
+                <a>Music</a>
+            </div>
+            <div className='item'>
+                <a>Settings</a>
+            </div>
+        </nav>
     );
 }
 

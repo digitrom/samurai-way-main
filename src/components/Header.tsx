@@ -1,24 +1,12 @@
 import React from 'react';
+import './Header.css';
 
 const Header = () => {
     return (
-        <nav className='nav'>
-            <div>
-                <a>Profile</a>
-            </div>
-            <div>
-                <a>Messages</a>
-            </div>
-            <div>
-                <a>News</a>
-            </div>
-            <div>
-                <a>Music</a>
-            </div>
-            <div>
-                <a>Settings</a>
-            </div>
-        </nav>
+        <header className='header'>
+            <img
+                src='https://www.adobe.com/express/create/media_127a4cd0c28c2753638768caf8967503d38d01e4c.jpeg?width=400&format=jpeg&optimize=medium'/>
+        </header>
     );
 }
 
