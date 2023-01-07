@@ -12,7 +12,7 @@ const Post: React.FC<PostType> = (props) => {
             <img src='https://elcritico.com.ar/wp-content/uploads/2020/12/AVA-POSTER.jpg'/>
             {props.message}
             <div>
-                <span>{props.likesCount}</span>
+                <span>likes</span> { props.likesCount }
             </div>
         </div>
     );
