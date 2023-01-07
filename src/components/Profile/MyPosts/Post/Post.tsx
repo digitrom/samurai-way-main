@@ -1,14 +1,19 @@
 import React from 'react';
 import s from './Post.module.css';
 
-const Post = () => {
+type PostType = {
+    message: string
+    likesCount: number
+}
+
+const Post: React.FC<PostType> = (props) => {
     return (
         <div className={s.item}>
             <img src='https://elcritico.com.ar/wp-content/uploads/2020/12/AVA-POSTER.jpg'/>
-            Post 1
-           <div>
-               <span>like </span>
-           </div>
+            {props.message}
+            <div>
+                <span>{props.likesCount}</span>
+            </div>
         </div>
     );
 }
