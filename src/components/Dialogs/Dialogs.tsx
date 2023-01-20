@@ -11,15 +11,16 @@ type MessageType = {
     message: string
 }
 
-type DialogsDataType ={
+type DialogsDataType = {
     id: number
     name: string
 }
 
-type MessageDataType ={
+type MessageDataType = {
     id: number
     message: string
 }
+
 
 const DialogItem: React.FC<DialogItemPropsType> = (props) => {
     let path = "/dialogs/" + props.id;
@@ -38,7 +39,7 @@ const Message: React.FC<MessageType> = (props) => {
 
 const Dialogs = () => {
 
-    let dialogsData: Array<DialogsDataType> = [
+    let dialogs: Array<DialogsDataType> = [
         {
             id: 1,
             name: "Roma"
@@ -56,7 +57,7 @@ const Dialogs = () => {
             name: "Pasha"
         }
     ]
-    let messagesData: Array<MessageDataType> = [
+    let messages: Array<MessageDataType> = [
         {
             id: 1,
             message: "Hey you"
@@ -71,26 +72,18 @@ const Dialogs = () => {
         }
     ]
 
+    let dialogElements = dialogs.map((d: DialogsDataType) => <DialogItem name={d.name} id={d.id}/>)
+
+    let messageElements = messages.map((m: MessageDataType) => <Message message={m.message}/>)
+
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem id={dialogsData[0].id} name={dialogsData[0].name}/>
-                <DialogItem id={dialogsData[1].id} name={dialogsData[1].name}/>
-                <DialogItem id={dialogsData[2].id} name={dialogsData[2].name}/>
-                <DialogItem id={dialogsData[3].id} name={dialogsData[3].name}/>
-
-
-
+                {dialogElements}
             </div>
             <div className={s.messages}>
-                <div className={s.dialog}>
-                    <Message message={messagesData[0].message}/></div>
-                <div className={s.dialog}>
-                    <Message message={messagesData[1].message}/></div>
-                <div className={s.dialog}>
-                    <Message message={messagesData[2].message}/></div>
-
+                {messageElements}
             </div>
         </div>
     )
