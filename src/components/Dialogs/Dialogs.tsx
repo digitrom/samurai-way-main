@@ -11,6 +11,16 @@ type MessageType = {
     message: string
 }
 
+type DialogsDataType ={
+    id: number
+    name: string
+}
+
+type MessageDataType ={
+    id: number
+    message: string
+}
+
 const DialogItem: React.FC<DialogItemPropsType> = (props) => {
     let path = "/dialogs/" + props.id;
     return (
@@ -27,23 +37,60 @@ const Message: React.FC<MessageType> = (props) => {
 }
 
 const Dialogs = () => {
+
+    let dialogsData: Array<DialogsDataType> = [
+        {
+            id: 1,
+            name: "Roma"
+        },
+        {
+            id: 2,
+            name: "Sasha"
+        },
+        {
+            id: 3,
+            name: "Vlad"
+        },
+        {
+            id: 4,
+            name: "Pasha"
+        }
+    ]
+    let messagesData: Array<MessageDataType> = [
+        {
+            id: 1,
+            message: "Hey you"
+        },
+        {
+            id: 2,
+            message: "How are You"
+        },
+        {
+            id: 3,
+            message: "Yo"
+        }
+    ]
+
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem name="Roma" id={1}/>
-                <DialogItem name="Sasha" id={2}/>
-                <DialogItem name="Vlad" id={3}/>
-                <DialogItem name="Pasha" id={4}/>
+                <DialogItem id={dialogsData[0].id} name={dialogsData[0].name}/>
+                <DialogItem id={dialogsData[1].id} name={dialogsData[1].name}/>
+                <DialogItem id={dialogsData[2].id} name={dialogsData[2].name}/>
+                <DialogItem id={dialogsData[3].id} name={dialogsData[3].name}/>
+
 
 
             </div>
             <div className={s.messages}>
                 <div className={s.dialog}>
-                    <Message message="Hey"/></div>
+                    <Message message={messagesData[0].message}/></div>
                 <div className={s.dialog}>
-                    <Message message="How are You"/></div>
+                    <Message message={messagesData[1].message}/></div>
                 <div className={s.dialog}>
-                    <Message message="Yo"/></div>
+                    <Message message={messagesData[2].message}/></div>
+
             </div>
         </div>
     )
