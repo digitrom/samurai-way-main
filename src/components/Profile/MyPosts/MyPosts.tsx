@@ -1,29 +1,12 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {PostDataType} from "../../../App";
 
-type PostDataType = {
-    id: number
-    message: string
-    likesCount: number
-}
 
-const MyPosts = () => {
-    let posts: Array<PostDataType> = [
-        {
-            id: 1,
-            message: "Hey you",
-            likesCount: 121
-        },
-        {
-            id: 2,
-            message: "How are You",
-            likesCount: 64
-        }
-    ]
+const MyPosts = (props:any) => {
 
-    let postElements = posts.map((p:PostDataType) => <Post message={p.message} likesCount={p.likesCount}/>)
-
+    let postElements = props.posts.map((p:PostDataType) => <Post message={p.message} likesCount={p.likesCount}/>)
 
     return (
         <div className={s.postsBlock}>
