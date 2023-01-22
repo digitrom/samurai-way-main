@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostDataType} from "../../../App";
+import {PostDataType} from "../../../index";
 
 
 const MyPosts = (props:any) => {

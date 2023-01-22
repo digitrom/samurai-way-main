@@ -8,55 +8,23 @@ export type DialogItemPropsType = {
     id: number
 }
 
-type DialogsDataType = {
+export type DialogsDataType = {
     id: number
     name: string
 }
 
-type MessageDataType = {
+export type MessageDataType = {
     id: number
     message: string
 }
 
 
-const Dialogs = () => {
+const Dialogs = (props: any) => {
 
-    let dialogs: Array<DialogsDataType> = [
-        {
-            id: 1,
-            name: "Roma"
-        },
-        {
-            id: 2,
-            name: "Sasha"
-        },
-        {
-            id: 3,
-            name: "Vlad"
-        },
-        {
-            id: 4,
-            name: "Pasha"
-        }
-    ]
-    let messages: Array<MessageDataType> = [
-        {
-            id: 1,
-            message: "Hey you"
-        },
-        {
-            id: 2,
-            message: "How are You"
-        },
-        {
-            id: 3,
-            message: "Yo"
-        }
-    ]
 
-    let dialogElements = dialogs.map((d: DialogsDataType) => <DialogItem name={d.name} id={d.id}/>)
+    let dialogElements = props.dialogs.map((d: DialogsDataType) => <DialogItem name={d.name} id={d.id}/>)
 
-    let messageElements = messages.map((m: MessageDataType) => <Message message={m.message}/>)
+    let messageElements = props.messages.map((m: MessageDataType) => <Message message={m.message}/>)
 
 
     return (
