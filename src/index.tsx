@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import {NewComponent, students, topCars} from "./components/NewComponent/NewComponent";
 import {state} from "./redux/state";
+import {BrowserRouter} from "react-router-dom";
 
 
 ReactDOM.render(
-    <App state={state}/>
+    <BrowserRouter>
+    <App state={state}/>  </BrowserRouter>
+
     // <NewComponent cars={topCars} />
     ,
   document.getElementById('root')

@@ -1,7 +1,7 @@
-
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+    sidebar: SidebarType
 }
 
 export type MessagesType = {
@@ -25,7 +25,22 @@ export type ProfilePageType = {
     posts: Array<PostsType>
 }
 
+export type SidebarType = {
+    friends: Array<FriendsType>
+}
+
+export type FriendsType = {
+    id: number,
+    name: string
+}
 export let state: StateType = {
+    sidebar: {
+        friends: [
+            {id: 1, name: "Sasha"},
+            {id: 2, name: "Roma"},
+            {id: 3, name: "Dima"},
+        ]
+    },
     profilePage: {
         posts: [
             {

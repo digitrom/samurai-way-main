@@ -17,6 +17,7 @@ const Dialogs = (props: PropsType) => {
 
     return (
         <div className={s.dialogs}>
+
             <div className={s.dialogsItems}>
                 {dialogElements}
             </div>
