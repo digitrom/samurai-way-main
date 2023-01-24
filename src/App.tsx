@@ -10,13 +10,11 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {StateType} from "./redux/state";
 
-export type StateRootType = {
-    state:StateType
+type PropsType = {
+    state: StateType
 }
 
-
-
-function App(props:StateRootType) {
+function App(props:PropsType) {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
