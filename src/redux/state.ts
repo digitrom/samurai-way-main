@@ -33,6 +33,18 @@ export type FriendsType = {
     id: number,
     name: string
 }
+
+export const addPost = (postMessage: string) => {
+    debugger
+   let newPost: PostsType = {
+       id: 4,
+       message: postMessage,
+       likesCount: 0
+       }
+       state.profilePage.posts.push(newPost);
+}
+
+
 export let state: StateType = {
     sidebar: {
         friends: [

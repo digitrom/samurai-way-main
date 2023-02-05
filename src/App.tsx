@@ -8,11 +8,12 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {StateType} from "./redux/state";
+import {addPost, StateType} from "./redux/state";
 import {Friends} from "./components/Navbar/Friends/Friends";
 
 type PropsType = {
     state: StateType
+    addPost: (postMessage: string) => void
 }
 
 function App(props: PropsType) {
@@ -22,7 +23,10 @@ function App(props: PropsType) {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
-                <Route path='/profile' render={() => <Profile state={props.state.profilePage}/>}/>
+                <Route path='/profile' render={() => <Profile
+                    state={props.state.profilePage}
+                    addPost={props.addPost}
+                />}/>
                 <Route path='/news' component={News}/>
                 <Route path='/music' component={Music}/>
                 <Route path='/settings' component={Settings}/>
