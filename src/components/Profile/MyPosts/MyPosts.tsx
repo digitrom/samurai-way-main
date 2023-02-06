@@ -21,7 +21,6 @@ const MyPosts = (props: PropsType) => {
         if(text) {
            return props.addPost(text)
         }
-        alert('введите текст')
     }
     return (
         <div className={s.postsBlock}>
