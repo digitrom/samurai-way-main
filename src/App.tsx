@@ -8,7 +8,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {addPost, StateType} from "./redux/state";
+import {addPost, state, StateType} from "./redux/state";
 import {Friends} from "./components/Navbar/Friends/Friends";
 
 type PropsType = {
