@@ -1,5 +1,7 @@
 import {reRenderEntireTree} from "../render";
 
+
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
@@ -25,6 +27,7 @@ export type DialogsPageType = {
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
+    newPostText: string
 }
 
 export type SidebarType = {
@@ -36,14 +39,19 @@ export type FriendsType = {
     name: string
 }
 
-export const addPost = (postMessage: string) => {
-    debugger
-   let newPost: PostsType = {
-       id: 4,
-       message: postMessage,
-       likesCount: 0
-       }
-       state.profilePage.posts.push(newPost);
+export const addPost = () => {
+    let newPost: PostsType = {
+        id: 4,
+        message: state.profilePage.newPostText,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = ''
+    reRenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string | undefined) => {
+    state.profilePage.newPostText = newText || ''
     reRenderEntireTree(state)
 }
 
@@ -68,7 +76,8 @@ export let state: StateType = {
                 message: "How are You",
                 likesCount: 64
             }
-        ]
+        ],
+        newPostText: "It-kamasutra"
     },
     dialogsPage: {
         dialogs: [
@@ -84,3 +93,6 @@ export let state: StateType = {
         ]
     }
 }
+
+
+window.state = state
