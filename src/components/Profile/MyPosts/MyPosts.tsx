@@ -19,8 +19,7 @@ const MyPosts = (props: PropsType) => {
 
 
     let addPost = () => {
-           return props.addPost()
-        // props.updateNewPostText('')
+        props.addPost()
     }
 
     let onPostChange = () => {
