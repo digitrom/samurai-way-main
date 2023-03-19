@@ -13,8 +13,8 @@ import {Friends} from "./components/Navbar/Friends/Friends";
 
 type PropsType = {
     state: StateType
-    addPost: () => void
-    addMessage: () => void
+    addPost: (newPostText: string) => void
+    addMessage: (newMessageText: string) => void
     updateNewPostText: (newText: string | undefined) => void
     updateNewMessageText: (newText: string | undefined) => void
 }
@@ -29,6 +29,7 @@ function App(props: PropsType) {
                     dialogsPage={props.state.dialogsPage}
                     addMessage={props.addMessage}
                     updateNewMessageText={props.updateNewMessageText}
+                    newMessageText={props.state.dialogsPage.newMessageText}
                 />}/>
                 <Route path='/profile' render={() => <Profile
                     profilePage={props.state.profilePage}

@@ -42,10 +42,10 @@ let reRenderEntireTree = (state: StateType) => {
     console.log("state was changed")
 }
 
-export const addPost = () => {
+export const addPost = (newPostText: string) => {
     let newPost: PostsType = {
         id: 4,
-        message: state.profilePage.newPostText,
+        message: newPostText,
         likesCount: 0
     }
     state.profilePage.posts.push(newPost);
@@ -53,10 +53,10 @@ export const addPost = () => {
     reRenderEntireTree(state)
 }
 
-export const addMessage = () => {
+export const addMessage = (newMessageText: string) => {
     let newMessage: PostsType = {
         id: 4,
-        message: state.dialogsPage.newMessageText,
+        message:newMessageText,
         likesCount: 0
     }
     state.dialogsPage.messages.push(newMessage);
@@ -75,8 +75,8 @@ export const updateNewMessageText = (newText: string | undefined) => {
     console.log(state)
 }
 
-export const subscribe = (callBack: (state:StateType) => void)  => {
-    reRenderEntireTree = callBack
+export const subscribe = (observer: (state:StateType) => void)  => {
+    reRenderEntireTree = observer
 }
 
 

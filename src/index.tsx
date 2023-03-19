@@ -5,8 +5,6 @@ import App from './App';
 import {state, addMessage, addPost, StateType, updateNewMessageText, updateNewPostText, subscribe} from "./redux/state";
 import {BrowserRouter} from "react-router-dom";
 
-
-
 export let reRenderEntireTree = (state: StateType) => {
 
     ReactDOM.render(
