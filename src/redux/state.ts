@@ -1,5 +1,3 @@
-import {reRenderEntireTree} from "../render";
-
 
 
 export type StateType = {
@@ -40,6 +38,10 @@ export type FriendsType = {
     name: string
 }
 
+let reRenderEntireTree = (state: StateType) => {
+    console.log("state was changed")
+}
+
 export const addPost = () => {
     let newPost: PostsType = {
         id: 4,
@@ -71,6 +73,10 @@ export const updateNewMessageText = (newText: string | undefined) => {
     state.dialogsPage.newMessageText = newText || ''
     reRenderEntireTree(state)
     console.log(state)
+}
+
+export const subscribe = (callBack: (state:StateType) => void)  => {
+    reRenderEntireTree = callBack
 }
 
 
