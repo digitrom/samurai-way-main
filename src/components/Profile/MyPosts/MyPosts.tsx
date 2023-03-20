@@ -19,6 +19,7 @@ const MyPosts = (props: PropsType) => {
 
 
     let addPost = () => {
+        debugger
         props.addPost(props.newPostText)
     }
 
