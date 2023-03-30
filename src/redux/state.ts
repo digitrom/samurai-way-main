@@ -35,14 +35,29 @@ export type FriendsType = {
 
 export type StoreType = {
     _state: StateType,
-    updateNewMessageText: (newText: string | undefined) => void
-    updateNewPostText: (newText: string | undefined) => void
-    addMessage: (newMessageText: string) => void
-    addPost: (newPostText: string) => void
     getState: () => StateType
-    _callSubscriber: () => void
+    _callSubscriber: () => void,
+    updateNewMessageText: (newText: string | undefined) => void
+   // updateNewPostText: (newText: string | undefined) => void
+    addMessage: (newMessageText: string) => void
+   // addPost: (newPostText: string) => void
+
     subscribe: (observer: () => void) => void
+    dispatch:(action: ActionsTypes) => void
 }
+
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+export type AddPostActionType = {
+    type: "ADD-POST"
+    newPostText: string
+}
+export type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
+
+
 
 export let store: StoreType = {
     _state: {
@@ -66,7 +81,7 @@ export let store: StoreType = {
                     likesCount: 64
                 }
             ],
-            newPostText: "It-kamasutra"
+            newPostText: ""
         },
         dialogsPage: {
             dialogs: [
@@ -90,17 +105,23 @@ export let store: StoreType = {
     _callSubscriber() {
         console.log("state was changed")
     },
-    addPost(newPostText: string) {
-        debugger
-        let newPost: PostsType = {
-            id: 4,
-            message: newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber()
-    },
+    // addPost(newPostText: string) {
+    //     debugger
+    //     let newPost: PostsType = {
+    //         id: 4,
+    //         message: newPostText,
+    //         likesCount: 0
+    //     }
+    //     this._state.profilePage.posts.push(newPost);
+    //     this._state.profilePage.newPostText = ''
+    //     this._callSubscriber()
+    // },
+
+    // updateNewPostText(newText: string | undefined) {
+    //     this._state.profilePage.newPostText = newText || ''
+    //     this._callSubscriber()
+    // },
+
     addMessage(newMessageText: string) {
         let newMessage: PostsType = {
             id: 4,
@@ -111,10 +132,6 @@ export let store: StoreType = {
         this._state.dialogsPage.newMessageText = ''
         this._callSubscriber()
     },
-    updateNewPostText(newText: string | undefined) {
-        this._state.profilePage.newPostText = newText || ''
-        this._callSubscriber()
-    },
     updateNewMessageText(newText: string | undefined) {
         this._state.dialogsPage.newMessageText = newText || ''
         this._callSubscriber()
@@ -122,6 +139,21 @@ export let store: StoreType = {
     },
     subscribe(observer) {
         this._callSubscriber = observer
+    },
+    dispatch(action) {
+        if (action.type === "ADD-POST"){
+            let newPost: PostsType = {
+                id: 4,
+                message: action.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber()
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.newPostText = action.newText  || ''
+            this._callSubscriber()
+        }
     }
 }
 
