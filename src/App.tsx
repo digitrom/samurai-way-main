@@ -8,17 +8,11 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {ActionsTypes, StateType, StoreType} from "./redux/state";
+import {ActionsTypes, StateType} from "./redux/state";
 import {Friends} from "./components/Navbar/Friends/Friends";
 
 type PropsType = {
     state: StateType
-    // addPost: (newPostText: string) => void
-    // addMessage: (newMessageText: string) => void
-    // updateNewPostText: (newText: string | undefined) => void
-    // updateNewMessageText: (newText: string | undefined) => void
-    // store: StoreType
-    // newPostText: string
     dispatch: (action: ActionsTypes) => void
 }
 
@@ -29,12 +23,16 @@ const App: React.FC<PropsType> = (props) => {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                {/*<Route path='/dialogs' render={() => <Dialogs*/}
-                {/*    dialogsPage={props.state.dialogsPage}*/}
-                {/*    addMessage={props.addMessage.bind(props.store)}*/}
-                {/*    updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}*/}
-                {/*    newMessageText={props.state.dialogsPage.newMessageText}*/}
-                {/*/>}/>*/}
+                <Route path='/dialogs' render={() => <Dialogs
+                    // messages ={props.state.dialogsPage.messages}
+                    dialogsPage={props.state.dialogsPage}
+                    dispatch={props.dispatch}
+                    // newMessageText={props.state.dialogsPage.newMessageText}
+                    // addMessage={props.addMessage.bind(props.store)}
+                    // updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}
+                    // newMessageText={props.state.dialogsPage.newMessageText}
+
+                />}/>
                 <Route path='/profile' render={() => <Profile
                     profilePage={props.state.profilePage}
                     dispatch={props.dispatch}
