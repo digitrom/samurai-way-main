@@ -19,6 +19,7 @@ const Dialogs = (props: PropsType) => {
     let dialogElements = props.dialogsPage.dialogs.map((d) => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messageElements = props.dialogsPage.messages.map((m) => <Message key={m.id} message={m.message}/>)
     // let newMessageElement = React.createRef<HTMLTextAreaElement>()
+    let newMessageText = props.dialogsPage.newMessageText
 
     let addMessage = () => {
         props.dispatch(addMessageAC(props.dialogsPage.newMessageText))
@@ -40,7 +41,8 @@ const Dialogs = (props: PropsType) => {
             </div>
             <div>
                 <textarea
-                    value={props.dialogsPage.newMessageText}
+                    placeholder="Enter your message"
+                    value={newMessageText}
                     onChange={onMessageChange}
                     // ref={newMessageElement}
                 />
