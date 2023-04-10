@@ -1,7 +1,7 @@
-import {PostsType, StateType} from "./state";
+import {ActionsTypes, DialogsPageType, PostsType, ProfilePageType, StateType} from "./state";
 
 
-export const dialogsReducer = (state: StateType, action: ActionsTypes): StateType => {
+export const dialogsReducer = (state: DialogsPageType, action: ActionsTypes): DialogsPageType => {
 
     if (action.type === "ADD-MESSAGE") {
         let newMessage: PostsType = {
@@ -9,16 +9,16 @@ export const dialogsReducer = (state: StateType, action: ActionsTypes): StateTyp
             message: action.payload.newMessageText,
             likesCount: 0
         }
-        state.dialogsPage.messages.push(newMessage);
-        state.dialogsPage.newMessageText = ''
+        state.messages.push(newMessage);
+        state.newMessageText = ''
     } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-        state.dialogsPage.newMessageText = action.payload.newText || ''
+        state.newMessageText = action.payload.newText || ''
     }
 
     return state
 }
 
-export type ActionsTypes = addMessageACType | onMessageChangeACType
+export type DialogsActionsTypes = addMessageACType | onMessageChangeACType
 
 
 type addMessageACType = ReturnType<typeof addMessageAC>

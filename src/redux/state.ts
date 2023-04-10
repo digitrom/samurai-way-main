@@ -1,9 +1,20 @@
-import {ChangeEvent} from "react";
+import {ProfileActionsTypes, profileReducer} from "./profile-reducer";
+import {DialogsActionsTypes, dialogsReducer} from "./dialogs-reducer";
+import {sidebarReducer} from "./sidebar-reducer";
 
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
+}
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText: string
+}
+export type DialogsPageType = {
+    messages: Array<MessagesType>
+    dialogs: Array<DialogsType>
+    newMessageText: string
 }
 export type MessagesType = {
     id: number
@@ -18,27 +29,20 @@ export type PostsType = {
     message: string
     likesCount: number
 }
-export type DialogsPageType = {
-    messages: Array<MessagesType>
-    dialogs: Array<DialogsType>
-    newMessageText: string
-}
-export type ProfilePageType = {
-    posts: Array<PostsType>
-    newPostText: string
-}
+
+
 export type SidebarType = {
     friends: Array<FriendsType>
 }
 export type FriendsType = {
-    id: number,
+    id: number
     name: string
 }
 
 export type StoreType = {
-    _state: StateType,
+    _state: StateType
     getState: () => StateType
-    _callSubscriber: () => void,
+    _callSubscriber: () => void
     // updateNewMessageText: (newText: string | undefined) => void
     // updateNewPostText: (newText: string | undefined) => void
     // addMessage: (newMessageText: string) => void
@@ -48,15 +52,8 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
+export type ActionsTypes = ProfileActionsTypes | DialogsActionsTypes
 
-
-
-// export type AddPostActionType = {
-//     type: "ADD-POST",
-//     payload: {
-//         newPostText: string
-//     }
-// }
 
 
 export let store: StoreType = {
@@ -108,32 +105,15 @@ export let store: StoreType = {
     subscribe(observer) {
         this._callSubscriber = observer
     },
+
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            let newPost: PostsType = {
-                id: 4,
-                message: action.payload.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber()
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.newPostText = action.payload.newText || ''
-            this._callSubscriber()
-        } else if (action.type === "ADD-MESSAGE") {
-            let newMessage: PostsType = {
-                id: 4,
-                message: action.payload.newMessageText,
-                likesCount: 0
-            }
-            this._state.dialogsPage.messages.push(newMessage);
-            this._state.dialogsPage.newMessageText = ''
-            this._callSubscriber()
-        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-            this._state.dialogsPage.newMessageText = action.payload.newText || ''
-            this._callSubscriber()
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+
+        this._callSubscriber()
+
     }
 }
 
