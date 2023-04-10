@@ -8,9 +8,8 @@ import {addPostAC, onPostChangeAC} from "../../../redux/profile-reducer";
 type PropsType = {
     posts: Array<PostsType>
     newPostText: string
-    // addPost: (newPostText: string) => void
-    // updateNewPostText: (newText: string | undefined) => void
-    dispatch: (action: ActionsTypes) => void
+    addPost: () => void
+    updateNewPostText: (text: string) => void
 }
 
 
@@ -22,16 +21,13 @@ const MyPosts = (props: PropsType) => {
     // let newPostElement = React.createRef<HTMLTextAreaElement>();// не явная типизация
 
 
-    let addPost = () => {
-        // debugger
-        // let action = {type : "ADD-POST", newPostText: props.newPostText }
-        props.dispatch(addPostAC(props.newPostText))
+    let onAddPost = () => {
+        props.addPost()
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // let text = newPostElement.current?.value;
-        // props.updateNewPostText(e.currentTarget.value)
-        props.dispatch(onPostChangeAC(e.currentTarget.value))
+        let text = e.currentTarget.value || ''
+        props.updateNewPostText(text)
     }
 
 
@@ -47,7 +43,7 @@ const MyPosts = (props: PropsType) => {
                     />
                 </div>
                 <div>
-                    <button onClick={addPost}>New Post</button>
+                    <button onClick={onAddPost}>New Post</button>
                 </div>
             </div>
             <div className={s.posts}>

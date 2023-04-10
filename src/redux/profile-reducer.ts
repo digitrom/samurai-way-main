@@ -1,17 +1,36 @@
-import {ActionsTypes, PostsType, ProfilePageType, StateType} from "./state";
+import {ActionsTypes, PostsType, ProfilePageType} from "./state";
 
-export const profileReducer = (state: ProfilePageType, action: ActionsTypes):ProfilePageType => {
-
-    if (action.type === "ADD-POST") {
-        let newPost: PostsType = {
-            id: 4,
-            message: action.payload.newPostText,
-            likesCount: 0
+let initialState ={
+    posts: [
+        {
+            id: 1,
+            message: "Hey you",
+            likesCount: 121
+        },
+        {
+            id: 2,
+            message: "How are You",
+            likesCount: 64
         }
-        state.posts.push(newPost);
-        state.newPostText = ''
-    } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-        state.newPostText = action.payload.newText || ''
+    ],
+    newPostText: ""
+}
+
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes):ProfilePageType => {
+
+    switch (action.type) {
+        case "ADD-POST":
+            let newPost: PostsType = {
+                id: 4,
+                message: action.payload.newPostText,
+                likesCount: 0
+            }
+            state.posts.push(newPost);
+            state.newPostText = ''
+            break;
+        case "UPDATE-NEW-POST-TEXT":
+            state.newPostText = action.payload.newText || ''
+            break;
     }
     return state
 }
@@ -29,11 +48,11 @@ export const addPostAC = (newPostText: string) => {
 }
 
 type onPostChangeACType = ReturnType<typeof onPostChangeAC>
-export const onPostChangeAC = (newText: string) => {
+export const onPostChangeAC = (text: string) => {
     return {
         type: "UPDATE-NEW-POST-TEXT",
         payload: {
-            newText: newText
+            newText: text
         }
     } as const
 }

@@ -1,18 +1,35 @@
 import {ActionsTypes, DialogsPageType, PostsType, ProfilePageType, StateType} from "./state";
 
+let initialState ={
+    dialogs: [
+        {id: 1, name: "Roma"},
+        {id: 2, name: "Sasha"},
+        {id: 3, name: "Vlad"},
+        {id: 4, name: "Pasha"}
+    ],
+    messages: [
+        {id: 1, message: "Hey you"},
+        {id: 2, message: "How are You"},
+        {id: 3, message: "Yo"}
+    ],
+    newMessageText: ""
+}
 
-export const dialogsReducer = (state: DialogsPageType, action: ActionsTypes): DialogsPageType => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
 
-    if (action.type === "ADD-MESSAGE") {
-        let newMessage: PostsType = {
-            id: 4,
-            message: action.payload.newMessageText,
-            likesCount: 0
-        }
-        state.messages.push(newMessage);
-        state.newMessageText = ''
-    } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-        state.newMessageText = action.payload.newText || ''
+    switch (action.type) {
+        case "ADD-MESSAGE":
+            let newMessage: PostsType = {
+                id: 4,
+                message: action.payload.newMessageText,
+                likesCount: 0
+            }
+            state.messages.push(newMessage);
+            state.newMessageText = ''
+            break;
+        case "UPDATE-NEW-MESSAGE-TEXT":
+            state.newMessageText = action.payload.newText || ''
+            break;
     }
 
     return state
