@@ -1,4 +1,4 @@
-import {ActionsTypes, DialogsPageType, PostsType, ProfilePageType, StateType} from "./state";
+import {ActionsTypes, DialogsPageType, PostsType} from "./state";
 
 let initialState ={
     dialogs: [

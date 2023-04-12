@@ -12,15 +12,9 @@ type PropsType = {
     updateNewPostText: (text: string) => void
 }
 
-
-
 const MyPosts = (props: PropsType) => {
 
     let postElements = props.posts.map((p) => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
-
-    // let newPostElement = React.createRef<HTMLTextAreaElement>();// не явная типизация
-
-
     let onAddPost = () => {
         props.addPost()
     }
