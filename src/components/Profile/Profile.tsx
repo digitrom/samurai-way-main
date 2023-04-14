@@ -5,18 +5,17 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 
 type PropsType ={
-    store: StoreType
+    // store: StoreType
 }
 
 const Profile = (props:PropsType) => {
 
-    let state = props.store.getState().profilePage
+    // let state = props.store.getState().profilePage
     return (
         <div>
             <ProfileInfo/>
             <MyPostsContainer
-               store={props.store}
-               newPostText={state.newPostText}
+               // newPostText={state.newPostText}
             />
         </div>
     );

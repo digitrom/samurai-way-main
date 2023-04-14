@@ -5,25 +5,20 @@ import App from './App';
 import {store} from "./redux/state";
 import {BrowserRouter} from "react-router-dom";
 import {StoreType} from "./redux/state";
+import StoreContext, {Provider} from "./StoreContext";
 
-export let reRenderEntireTree = (store: StoreType)   => {
+export let reRenderEntireTree = (store: StoreType) => {
     ReactDOM.render(
-        <BrowserRouter> <App
-            store={store}
-            // state={store.getState()}
-            // dispatch={store.dispatch.bind(store)}
-            // addMessage={store.addMessage.bind(store)}
-            // updateNewPostText={store.updateNewPostText.bind(store)}
-            // updateNewMessageText={store.updateNewMessageText.bind(store)}
-            // store={store}
-        /> </BrowserRouter>
-        ,
-        document.getElementById('root')
+        <BrowserRouter>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </BrowserRouter>, document.getElementById('root')
     );
 }
 
 reRenderEntireTree(store)
 
-store.subscribe(()=> {
+store.subscribe(() => {
     reRenderEntireTree(store)
 })
