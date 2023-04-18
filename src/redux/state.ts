@@ -7,24 +7,24 @@ export type StateType = {
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
 }
-export type DialogsPageType = {
+ type DialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
     newMessageText: string
 }
-export type MessagesType = {
+ type MessagesType = {
     id: number
     message: string
 }
-export type DialogsType = {
+ type DialogsType = {
     id: number
     name: string
 }
-export type PostsType = {
+ type PostsType = {
     id: number
     message: string
     likesCount: number

@@ -1,4 +1,16 @@
-import {ActionsTypes, PostsType, ProfilePageType} from "./state";
+import {ActionsTypes} from "./state";
+
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText: string
+}
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type InitialStateType = typeof initialState
 
 let initialState ={
     posts: [
@@ -12,11 +24,11 @@ let initialState ={
             message: "How are You",
             likesCount: 64
         }
-    ],
+    ] as Array<PostsType>,
     newPostText: ""
-}
+} as ProfilePageType
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes):ProfilePageType => {
+export const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes):InitialStateType => {
 
     switch (action.type) {
         case "ADD-POST":
@@ -38,11 +50,12 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 export type ProfileActionsTypes = addPostACType | onPostChangeACType
 
 export type addPostACType = ReturnType<typeof addPostAC>
-export const addPostAC = (newPostText: string) => {
+export const addPostAC = () => {
     return {
         type: "ADD-POST",
         payload: {
-            newPostText: newPostText
+            // newPostText: newPostText
+            newPostText: ""
         }
     } as const
 }

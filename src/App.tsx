@@ -4,11 +4,10 @@ import {Route} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {ActionsTypes, StateType, store, StoreType} from "./redux/state";
+import {store} from "./redux/state";
 import {Friends} from "./components/Navbar/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 

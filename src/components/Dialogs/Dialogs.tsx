@@ -2,27 +2,26 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionsTypes, DialogsPageType, StoreType} from "../../redux/state";
-import {addMessageAC, onMessageChangeAC} from "../../redux/dialogs-reducer";
+import {DialogsType, MessagesType} from "../../redux/dialogs-reducer";
+import {DialogsPropsType} from "./DialogsContainer"
 
 
 
 type PropsType = {
-    // messages: Array<MessagesType>
-    // newMessageText: string
-    dialogsPage: DialogsPageType
-    // dispatch: (action: ActionsTypes) => void
-    // updateNewMessageText: (newText: string | undefined) => void
-    addMessage: () => void
-    updateNewMessageText: (text: string) => void
+    // // messages: Array<MessagesType>
+    // // newMessageText: string
+    // dialogsPage: DialogsPageType
+    // // dispatch: (action: ActionsTypes) => void
+    // // updateNewMessageText: (newText: string | undefined) => void
+    // addMessage: () => void
+    // updateNewMessageText: (text: string) => void
 }
-const Dialogs = (props: PropsType) => {
+const Dialogs = (props: DialogsPropsType) => {
 
     let state= props.dialogsPage
 
-    let dialogElements = state.dialogs.map((d) => <DialogItem key={d.id} name={d.name} id={d.id}/>)
-    let messageElements = state.messages.map((m) => <Message key={m.id} message={m.message}/>)
-    // let newMessageElement = React.createRef<HTMLTextAreaElement>()
+    let dialogElements = state.dialogs.map((d:DialogsType) => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messageElements = state.messages.map((m:MessagesType) => <Message key={m.id} message={m.message}/>)
     let newMessageText = state.newMessageText
 
     let addMessage = () => {
@@ -49,7 +48,6 @@ const Dialogs = (props: PropsType) => {
                     placeholder="Enter your message"
                     value={newMessageText}
                     onChange={onMessageChange}
-                    // ref={newMessageElement}
                 />
             </div>
             <div>

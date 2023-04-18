@@ -1,4 +1,20 @@
-import {ActionsTypes, DialogsPageType, PostsType} from "./state";
+import {ActionsTypes} from "./state";
+
+
+export type MessagesType = {
+    id: number
+    message: string
+}
+export type DialogsType = {
+    id: number
+    name: string
+}
+
+export type DialogsPageType = {
+    messages: Array<MessagesType>
+    dialogs: Array<DialogsType>
+    newMessageText: string
+}
 
 let initialState ={
     dialogs: [
@@ -6,23 +22,25 @@ let initialState ={
         {id: 2, name: "Sasha"},
         {id: 3, name: "Vlad"},
         {id: 4, name: "Pasha"}
-    ],
+    ] as Array<DialogsType>,
     messages: [
         {id: 1, message: "Hey you"},
         {id: 2, message: "How are You"},
         {id: 3, message: "Yo"}
-    ],
+    ] as Array<MessagesType>,
     newMessageText: ""
 }
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
+export type InitialStateType = typeof initialState
+
+export const dialogsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
 
     switch (action.type) {
         case "ADD-MESSAGE":
-            let newMessage: PostsType = {
+            let newMessage: MessagesType = {
                 id: 4,
                 message: action.payload.newMessageText,
-                likesCount: 0
+                // likesCount: 0
             }
             state.messages.push(newMessage);
             state.newMessageText = ''
@@ -39,11 +57,11 @@ export type DialogsActionsTypes = addMessageACType | onMessageChangeACType
 
 
 type addMessageACType = ReturnType<typeof addMessageAC>
-export const addMessageAC = (newMessageText: string) => {
+export const addMessageAC = () => {
     return {
         type: "ADD-MESSAGE",
         payload: {
-            newMessageText: newMessageText
+            newMessageText: ''
         }
     } as const
 }

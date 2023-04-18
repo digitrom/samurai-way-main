@@ -1,37 +1,42 @@
 import React from 'react';
-import {addPostAC, onPostChangeAC} from "../../../redux/profile-reducer";
+import {addPostAC, InitialStateType, onPostChangeAC, PostsType, ProfilePageType} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
-import StoreContext from "../../../StoreContext";
+import {connect} from "react-redux";
+import {AppStateType} from "../../../redux/redux-store";
+import {Dispatch} from "redux";
 
 
-type PropsType = {
-    // store: StoreType;
-    // newPostText: string
+type MapStateToPropsType = {
+    posts: Array<PostsType>
+    newPostText: string
 }
 
-export const MyPostsContainer = (props: PropsType) => {
+type MapDispatchToPropsType = {
+    addPost: () => void
+    updateNewPostText: (text: string) => void
+}
 
-    return (
-        <StoreContext.Consumer>
-            {(store) => {
-                let state = store.getState().profilePage
+export type MyPostPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-                let addPost = () => {
-                    store.dispatch(addPostAC(state.newPostText))
-                }
+const mapSateToProps = (state: AppStateType): MapStateToPropsType => {
+    return {
+        posts: state.profilePage.posts,
+        newPostText: state.profilePage.newPostText
+    }
 
-                let onPostChange = (text: string) => {
-                    store.dispatch(onPostChangeAC(text))
-                }
+}
 
-                return <MyPosts posts={state.posts}
-                                newPostText={state.newPostText}
-                                addPost={addPost}
-                                updateNewPostText={onPostChange}/>
-            }
+const mapDispatchToProps = (dispatch: Dispatch):MapDispatchToPropsType => {
+    return {
+        addPost: () => dispatch(addPostAC()),
+        updateNewPostText: (text: string) =>
+        {
+            let action = onPostChangeAC(text)
+            dispatch(action)
         }
-        </StoreContext.Consumer>
-    )
+    }
 }
+
+const MyPostsContainer = connect(mapSateToProps, mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer;
