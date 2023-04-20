@@ -14,3 +14,5 @@ export type  AppStateType =  ReturnType <typeof rootReducer>
 
 export let store = createStore(rootReducer)
 
+window.state= store
+
