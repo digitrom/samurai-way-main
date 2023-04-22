@@ -7,15 +7,6 @@ import {DialogsPropsType} from "./DialogsContainer"
 
 
 
-type PropsType = {
-    // // messages: Array<MessagesType>
-    // // newMessageText: string
-    // dialogsPage: DialogsPageType
-    // // dispatch: (action: ActionsTypes) => void
-    // // updateNewMessageText: (newText: string | undefined) => void
-    // addMessage: () => void
-    // updateNewMessageText: (text: string) => void
-}
 const Dialogs = (props: DialogsPropsType) => {
 
     let state= props.dialogsPage

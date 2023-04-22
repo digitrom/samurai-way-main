@@ -3,9 +3,7 @@ import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {MyPostPropsType} from "./MyPostsContainer";
 
-type PropsType = {
-    posts: string
-}
+
 
 const MyPosts = (props: MyPostPropsType) => {
 
