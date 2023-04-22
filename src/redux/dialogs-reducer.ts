@@ -34,7 +34,6 @@ let initialState = {
 export type InitialStateType = typeof initialState
 
 export const dialogsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
-    let stateCopy;
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-TEXT":
             return  {
@@ -50,7 +49,7 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: A
             }
         default:
             return state
-    }   
+    }
 }
 
 export type DialogsActionsTypes = addMessageACType | onMessageChangeACType

@@ -1,6 +1,7 @@
 import {ProfileActionsTypes, profileReducer} from "./profile-reducer";
 import {DialogsActionsTypes, dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
+import {FollowUnfollowACType} from "./users-reducer";
 
 export type StateType = {
     profilePage: ProfilePageType
@@ -52,7 +53,7 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = ProfileActionsTypes | DialogsActionsTypes
+export type ActionsTypes = ProfileActionsTypes | DialogsActionsTypes | FollowUnfollowACType
 
 
 
