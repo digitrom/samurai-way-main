@@ -12,7 +12,7 @@ export type PostsType = {
 
 export type InitialStateType = typeof initialState
 
-let initialState ={
+let initialState = {
     posts: [
         {
             id: 1,
@@ -28,25 +28,23 @@ let initialState ={
     newPostText: ""
 }
 
-export const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes):InitialStateType => {
-let stateCopy;
+export const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case "ADD-POST":
             let newPost = state.newPostText
-            stateCopy= {
+            return {
                 ...state,
-                    posts: [...state.posts, {id: 3, message: newPost, likesCount: 43 }]
+                posts: [...state.posts, {id: 3, message: newPost, likesCount: 43}],
+                newPostText: ""
             }
-            return stateCopy
         case "UPDATE-NEW-POST-TEXT":
-           stateCopy = {
-               ...state,
-               newPostText: action.payload.newText
-           }
-            return stateCopy
+            return {
+                ...state,
+                newPostText: action.payload.newText
+            }
         default:
             return state
-        }
+    }
 }
 
 export type ProfileActionsTypes = addPostACType | onPostChangeACType

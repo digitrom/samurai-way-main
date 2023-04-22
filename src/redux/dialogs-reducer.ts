@@ -16,7 +16,7 @@ export type DialogsPageType = {
     newMessageText: string
 }
 
-let initialState ={
+let initialState = {
     dialogs: [
         {id: 1, name: "Roma"},
         {id: 2, name: "Sasha"},
@@ -34,26 +34,23 @@ let initialState ={
 export type InitialStateType = typeof initialState
 
 export const dialogsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
-let stateCopy;
+    let stateCopy;
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-TEXT":
-            stateCopy = {
+            return  {
                 ...state,
                 newMessageText: action.payload.newText
             }
-            return stateCopy
-
         case "ADD-MESSAGE":
             let newMessage = state.newMessageText
-           stateCopy = {
+            return {
                 ...state,
-                messages: [...state.messages, {id: 6, message: newMessage}   ]
+                messages: [...state.messages, {id: 6, message: newMessage}],
+                newMessageText: ''
             }
-            return stateCopy
         default:
             return state
-    }
-
+    }   
 }
 
 export type DialogsActionsTypes = addMessageACType | onMessageChangeACType
