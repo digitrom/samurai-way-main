@@ -5,7 +5,7 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
-export type UsersType = {
+export type UserType = {
     id: string
     photoUrl: string
     followed: boolean
@@ -18,35 +18,12 @@ export type LocationType = {
     country: string
     city: string
 }
-export type InitialStateType = typeof initialState
+export type InitialStateType = {
+    users: Array<UserType>
+}
 
-let initialState = {
-    users: [
-        {
-            id: '1',
-            photoUrl: 'https://avatarfiles.alphacoders.com/196/196653.jpg',
-            followed: true,
-            fullName: "Roma",
-            status: 'I am a father',
-            location: {country: 'Poland', city: 'Warsaw'}
-        },
-        {
-            id: '2',
-            photoUrl: 'https://avatarfiles.alphacoders.com/196/196653.jpg',
-            followed: false,
-            fullName: "Sasha",
-            status: 'I am a friend',
-            location: {country: 'Belarus', city: 'Minsk'}
-        },
-        {
-            id: '3',
-            photoUrl: 'https://avatarfiles.alphacoders.com/196/196653.jpg',
-            followed: true,
-            fullName: "Dima",
-            status: 'I am a brother',
-            location: {country: 'Belarus', city: 'Vozera'}
-        }
-    ] as Array<UsersType>,
+let initialState:InitialStateType = {
+users: []
 }
 
 export const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
@@ -96,7 +73,7 @@ export const unfollowAC = (userId: string) => {
 }
 
 type setUsersACType = ReturnType<typeof setUsersAC>
-export const setUsersAC = (users: Array<UsersType>) => {
+export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: SET_USERS,
         payload: {
