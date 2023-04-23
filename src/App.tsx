@@ -11,6 +11,7 @@ import {store} from "./redux/state";
 import {Friends} from "./components/Navbar/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Users from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 type PropsType = {
     // state: StateType
@@ -31,7 +32,7 @@ const App: React.FC<PropsType> = (props) => {
                 <Route path='/music' component={Music}/>
                 <Route path='/settings' component={Settings}/>
                 <Route path='/friends' render={() => <Friends state={state.sidebar}/>}/>
-                <Route path='/users' render={() => <Users/>}/>
+                <Route path='/users' render={() => <UsersContainer/>}/>
             </div>
         </div>
     )
