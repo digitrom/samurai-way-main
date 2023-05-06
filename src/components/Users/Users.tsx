@@ -2,41 +2,21 @@ import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import styles from './Users.module.css'
 import {UserType} from "../../redux/users-reducer";
+import axios from "axios";
+import userPhoto from '../../assets/images/user-128.png'
 
 const Users = (props: UsersPropsType) => {
 if (props.users.length === 0)
-    props.setUsers([
-        {
-            id: '1',
-            photoUrl: 'https://avatarfiles.alphacoders.com/196/196653.jpg',
-            followed: true,
-            fullName: "Roma",
-            status: 'I am a father',
-            location: {country: 'Poland', city: 'Warsaw'}
-        },
-        {
-            id: '2',
-            photoUrl: 'https://avatarfiles.alphacoders.com/196/196653.jpg',
-            followed: false,
-            fullName: "Sasha",
-            status: 'I am a friend',
-            location: {country: 'Belarus', city: 'Minsk'}
-        },
-        {
-            id: '3',
-            photoUrl: 'https://avatarfiles.alphacoders.com/196/196653.jpg',
-            followed: true,
-            fullName: "Dima",
-            status: 'I am a brother',
-            location: {country: 'Belarus', city: 'Vozera'}
-        }
-    ] as Array<UserType>)
+    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+        // debugger
+        props.setUsers(response.data.items)
+    })
     return <div>
         {
             props.users.map(el => <div key={el.id}>
 <span>
     <div>
-        <img src={el.photoUrl} className={styles.userPhoto}/>
+        <img src={el.photos.small !== null ? el.photos.small: userPhoto} className={styles.userPhoto}/>
     </div>
     <div>
         {el.followed
@@ -46,12 +26,12 @@ if (props.users.length === 0)
 </span>
 <span>
     <span>
-        <div>{el.fullName}</div>
+        <div>{el.name}</div>
         <div>{el.status}</div>
     </span>
     <span>
-        <div>{el.location.country}</div>
-        <div>{el.location.city}</div>
+        <div>{'el.location.country'}</div>
+        <div>{'el.location.city'}</div>
     </span>
 </span>
             </div>)
