@@ -23,10 +23,16 @@ export type LocationType = {
 }
 export type InitialStateType = {
     users: Array<UserType>
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
 }
 
-let initialState:InitialStateType = {
-users: []
+let initialState: InitialStateType = {
+    users: [],
+    totalUsersCount: 21,
+    pageSize: 5,
+    currentPage: 1
 }
 
 export const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {

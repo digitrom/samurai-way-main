@@ -7,6 +7,9 @@ import {followAC, setUsersAC, unfollowAC, UserType} from "../../redux/users-redu
 
 export type MapStateToPropsType = {
     users: UserType[]
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
 }
 
 export type MapDispatchToPropsType = {
@@ -19,7 +22,10 @@ export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        pageSize: state.usersPage.pageSize,
+        currentPage: state.usersPage.currentPage
     }
 }
 
