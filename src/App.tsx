@@ -10,7 +10,7 @@ import Settings from "./components/Settings/Settings";
 import {store} from "./redux/state";
 import {Friends} from "./components/Navbar/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import Users from "./components/Users/Users";
+import UsersApi from "./components/Users/UsersApi";
 import UsersContainer from "./components/Users/UsersContainer";
 
 type PropsType = {
