@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage,
@@ -13,7 +12,7 @@ import {
 } from "../../redux/users-reducer";
 import axios from "axios";
 import Users from "./Users";
-import preloader from "../../assets/images/preloader.gif"
+import Preloader from "../common/preloader/Preloader";
 
 export type MapStateToPropsType = {
     users: UserType[]
@@ -53,7 +52,7 @@ class UsersContainer extends React.Component<UsersPropsType, UserType> {
     render() {
         return (
             <>
-                { this.props.isFetching ? <img src={preloader} /> : ''  }
+                { this.props.isFetching ? <Preloader/> : ''  }
                 <Users
                 onPageChanged={this.onPageChanged}
                 currentPage={this.props.currentPage}
