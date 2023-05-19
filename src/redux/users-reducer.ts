@@ -1,11 +1,9 @@
-import {ActionsTypes} from "./state";
-
-
 // const FOLLOW = 'FOLLOW';
 // const UNFOLLOW = 'UNFOLLOW';
 // const SET_USERS = 'SET_USERS';
 // const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 // const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+
 
 export type UserType = {
     id: string
@@ -39,7 +37,7 @@ let initialState: InitialStateType = {
     isFetching: true
 }
 
-export const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+export const usersReducer = (state: InitialStateType = initialState, action: AllACType): InitialStateType => {
     switch (action.type) {
         case 'FOLLOW':
             return {
