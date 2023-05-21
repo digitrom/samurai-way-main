@@ -11,7 +11,7 @@ export type PostsType = {
 }
 
 export type ProfileType = {
-photo: { small: string, large: string}
+    photos: { small: string, large: string}
 }
 
 export type InitialStateType = typeof initialState
@@ -30,7 +30,7 @@ let initialState = {
         }
     ] as Array<PostsType>,
     newPostText: "",
-    profile: {}
+    profile: null as ProfileType | null
 }
 
 export const profileReducer = (state: InitialStateType = initialState, action: ProfileActionsTypes): InitialStateType => {
@@ -80,7 +80,7 @@ export const onPostChangeAC = (text: string) => {
     } as const
 }
 type setProfileACType = ReturnType<typeof setProfile>
-export const setProfile = (profile: ProfilePageType) => {
+export const setProfile = (profile: ProfileType) => {
     return {
         type: "SET-PROFILE",
         payload: {

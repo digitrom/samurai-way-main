@@ -50,8 +50,9 @@ class UsersContainer extends React.Component<UsersPropsType, UserType> {
             this.props.toggleIsFetching(false)
          })
     }
-
+    
     render() {
+        // debugger
         return (
             <>
                 { this.props.isFetching ? <Preloader/> : ''  }
