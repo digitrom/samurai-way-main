@@ -1,13 +1,17 @@
-import {ActionsTypes} from "./state";
 
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
+    profile: ProfileType
 }
 export type PostsType = {
     id: number
     message: string
     likesCount: number
+}
+
+export type ProfileType = {
+    photos: { small: string, large: string}
 }
 
 export type InitialStateType = typeof initialState
@@ -25,10 +29,11 @@ let initialState = {
             likesCount: 64
         }
     ] as Array<PostsType>,
-    newPostText: ""
+    newPostText: "",
+    profile: null as ProfileType | null
 }
 
-export const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+export const profileReducer = (state: InitialStateType = initialState, action: ProfileActionsTypes): InitialStateType => {
     switch (action.type) {
         case "ADD-POST":
             let newPost = state.newPostText
@@ -42,19 +47,24 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 ...state,
                 newPostText: action.payload.newText
             }
+        case "SET-PROFILE":
+            return {
+                ...state,
+                profile: action.payload.profile
+            }
+
         default:
             return state
     }
 }
 
-export type ProfileActionsTypes = addPostACType | onPostChangeACType
+export type ProfileActionsTypes = addPostACType | onPostChangeACType | setProfileACType
 
 export type addPostACType = ReturnType<typeof addPostAC>
 export const addPostAC = () => {
     return {
         type: "ADD-POST",
         payload: {
-            // newPostText: newPostText
             newPostText: ""
         }
     } as const
@@ -66,6 +76,15 @@ export const onPostChangeAC = (text: string) => {
         type: "UPDATE-NEW-POST-TEXT",
         payload: {
             newText: text
+        }
+    } as const
+}
+type setProfileACType = ReturnType<typeof setProfile>
+export const setProfile = (profile: ProfileType) => {
+    return {
+        type: "SET-PROFILE",
+        payload: {
+            profile
         }
     } as const
 }
