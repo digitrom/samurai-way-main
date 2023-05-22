@@ -21,14 +21,13 @@ type RouteParams = {
     userId: string | undefined
 }
 
-class ProfileContainer extends React.Component<RouteComponentProps<RouteParams>,ProfilePropsType> {
+class ProfileContainer extends React.Component< RouteComponentProps<RouteParams> & ProfilePropsType> {
     componentDidMount() {
+        const {userId: id } = this.props.match.params
         debugger
-        let userId = this.props.match.params.userId
-        if (!userId) {
-            userId = '2'
-        }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2` + userId).then(response => {
+        let userId: number = id ? Number(id) : 2
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
             // console.log(response)
             this.props.setProfile(response.data)
         })
