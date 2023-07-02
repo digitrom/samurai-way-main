@@ -70,8 +70,6 @@ class UsersContainer extends React.Component<UsersPropsType, UserType> {
     }
 }
 
-
-
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -83,17 +81,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 }
-
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-//     return {
-//         follow: (userId: string) => dispatch(followAC(userId)),
-//         unfollow: (userId: string) => dispatch(unfollowAC(userId)),
-//         setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
-//         setCurrentPage: (currentPage: number )=> dispatch(setCurrentPageAC(currentPage)),
-//         setTotalUsersCount: (totalUsersCount: number )=> dispatch(setTotalUsersCountAC(totalUsersCount)),
-//         toggleIsFetching: (isFetching : boolean) => dispatch(isFetchingAC(isFetching))
-//     }
-// }
 
 export default  connect(mapStateToProps, {
     follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching

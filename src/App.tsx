@@ -11,6 +11,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {store} from "./redux/redux-store";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 type PropsType = {
     // state: StateType
@@ -22,7 +23,7 @@ const App: React.FC<PropsType> = (props) => {
     const state = store.getState()
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
