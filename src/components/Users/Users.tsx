@@ -3,6 +3,7 @@ import userPhoto from "../../assets/images/user-128.png";
 import React from "react";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersPropsType1 = {
     onPageChanged: (currentPage: number) => void
@@ -45,10 +46,29 @@ const Users = (props: UsersPropsType1) => {
     <div>
         {el.followed
             ? <button onClick={() => {
-                props.unfollow(el.id)
+                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
+                    withCredentials: true,
+                    headers: {
+                        'API-KEY':'bf9b2fdb-0844-4b4a-9eec-962dd771a951'}
+                },  )
+                    .then(response => {
+                        if (response.data.resultCode === 0) {
+                            props.unfollow(el.id)
+                        }
+                    })
             }}>Unfollow</button>
             : <button onClick={() => {
-                props.follow(el.id)
+                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
+                    withCredentials: true,
+                    headers: {
+                        'API-KEY':'bf9b2fdb-0844-4b4a-9eec-962dd771a951'
+                    }
+                })
+                    .then(response => {
+                        if (response.data.resultCode === 0) {
+                            props.follow(el.id)
+                        }
+                    })
             }}>Follow</button>}
     </div>
 </span>

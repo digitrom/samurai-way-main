@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Header from "./Header";
 import {AppStateType} from "../../redux/redux-store";
-import {InitialStateType, setAuthUserData} from "../../redux/auth-reducer";
+import {setAuthUserData} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 
 
