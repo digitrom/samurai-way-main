@@ -13,8 +13,8 @@ type UsersPropsType1 = {
     totalUsersCount: number
     pageSize: number
     users: UserType[]
-    toggleIsFollowingInProgress: (followingInProgress: boolean) => void
-    followingInProgress: boolean
+    toggleIsFollowingInProgress: (followingInProgress: boolean, userID: string) => void
+    followingInProgress: Array<string>
 }
 
 const Users = (props: UsersPropsType1) => {
@@ -47,8 +47,8 @@ const Users = (props: UsersPropsType1) => {
 
     <div>
         {el.followed
-            ? <button disabled={props.followingInProgress} onClick={() => {
-                props.toggleIsFollowingInProgress(true)
+            ? <button disabled={props.followingInProgress.some(id=> id === el.id)} onClick={() => {
+                props.toggleIsFollowingInProgress(true, el.id)
                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
                     withCredentials: true,
                     headers: {
@@ -58,11 +58,11 @@ const Users = (props: UsersPropsType1) => {
                         if (response.data.resultCode === 0) {
                             props.unfollow(el.id)
                         }
-                        props.toggleIsFollowingInProgress(false)
+                        props.toggleIsFollowingInProgress(false, el.id)
                     })
             }}>Unfollow</button>
-            : <button disabled={props.followingInProgress} onClick={() => {
-                props.toggleIsFollowingInProgress(true)
+            : <button disabled={props.followingInProgress.some(id=> id === el.id) } onClick={() => {
+                props.toggleIsFollowingInProgress(true, el.id)
                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
                     withCredentials: true,
                     headers: {
@@ -73,7 +73,7 @@ const Users = (props: UsersPropsType1) => {
                         if (response.data.resultCode === 0) {
                             props.follow(el.id)
                         }
-                        props.toggleIsFollowingInProgress(false)
+                        props.toggleIsFollowingInProgress(false, el.id)
                     })
             }}>Follow</button>}
     </div>
