@@ -3,8 +3,6 @@ import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {MyPostPropsType} from "./MyPostsContainer";
 
-
-
 const MyPosts = (props: MyPostPropsType) => {
 
     let postElements = props.posts.map((p) => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
@@ -16,7 +14,6 @@ const MyPosts = (props: MyPostPropsType) => {
         let text = e.currentTarget.value || ''
         props.updateNewPostText(text)
     }
-
 
     return (
         <div className={s.postsBlock}>

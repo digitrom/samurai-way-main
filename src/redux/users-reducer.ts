@@ -5,6 +5,10 @@
 // const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+import {AppDispatchType} from "./redux-store";
+
 export type UserType = {
     id: string
     photos: {
@@ -159,4 +163,14 @@ export const toggleIsFollowingInProgress = (isFetching: boolean, userId:string) 
     } as const
 }
 
-
+export const getUserThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch ) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+               dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+                dispatch(toggleIsFetching(false))
+            })
+    }
+}

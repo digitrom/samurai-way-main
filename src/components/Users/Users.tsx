@@ -13,7 +13,7 @@ type UsersPropsType1 = {
     totalUsersCount: number
     pageSize: number
     users: UserType[]
-    toggleIsFollowingInProgress: (followingInProgress: boolean, userID: string) => void
+    toggleIsFollowingInProgress: (isFetching: boolean, userID: string) => void
     followingInProgress: Array<string>
 }
 
@@ -47,13 +47,14 @@ const Users = (props: UsersPropsType1) => {
 
     <div>
         {el.followed
-            ? <button disabled={props.followingInProgress.some(id=> id === el.id)} onClick={() => {
+            ? <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
                 props.toggleIsFollowingInProgress(true, el.id)
                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
                     withCredentials: true,
                     headers: {
-                        'API-KEY':'bf9b2fdb-0844-4b4a-9eec-962dd771a951'}
-                },  )
+                        'API-KEY': 'bf9b2fdb-0844-4b4a-9eec-962dd771a951'
+                    }
+                },)
                     .then(response => {
                         if (response.data.resultCode === 0) {
                             props.unfollow(el.id)
@@ -61,12 +62,12 @@ const Users = (props: UsersPropsType1) => {
                         props.toggleIsFollowingInProgress(false, el.id)
                     })
             }}>Unfollow</button>
-            : <button disabled={props.followingInProgress.some(id=> id === el.id) } onClick={() => {
+            : <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
                 props.toggleIsFollowingInProgress(true, el.id)
                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
                     withCredentials: true,
                     headers: {
-                        'API-KEY':'bf9b2fdb-0844-4b4a-9eec-962dd771a951'
+                        'API-KEY': 'bf9b2fdb-0844-4b4a-9eec-962dd771a951'
                     }
                 })
                     .then(response => {
