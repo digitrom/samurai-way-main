@@ -5,11 +5,11 @@ import {
     follow,
     setCurrentPage,
     unfollow,
-    UserType, toggleIsFollowingInProgress, getUserThunkCreator
+    toggleIsFollowingInProgress, getUserThunkCreator
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
-import {usersAPI} from "../../api/api";
+import {usersAPI, UserType} from "../../api/api";
 
 export type MapStateToPropsType = {
     users: UserType[]

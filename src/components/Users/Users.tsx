@@ -1,10 +1,11 @@
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user-128.png";
 import React from "react";
-import {toggleIsFollowingInProgress, UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
+import {usersAPI, UserType} from "../../api/api";
+import {followThunkCreator, unfollowThunkCreator} from "../../redux/users-reducer";
+import {useDispatch} from "react-redux";
+import {UsersDispatchType} from "../../redux/redux-store";
 
 type UsersPropsType1 = {
     onPageChanged: (currentPage: number) => void
@@ -19,6 +20,8 @@ type UsersPropsType1 = {
 }
 
 const Users = (props: UsersPropsType1) => {
+
+    const dispatch = useDispatch<UsersDispatchType>()
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
     let pages = []
@@ -49,24 +52,10 @@ const Users = (props: UsersPropsType1) => {
     <div>
         {el.followed
             ? <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
-                props.toggleIsFollowingInProgress(true, el.id)
-                    usersAPI.unfollow(el.id)
-                        .then(response => {
-                        if (response.data.resultCode === 0) {
-                            props.unfollow(el.id)
-                        }
-                        props.toggleIsFollowingInProgress(false, el.id)
-                    })
+        dispatch(followThunkCreator(el.id))
             }}>Unfollow</button>
             : <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
-                props.toggleIsFollowingInProgress(true, el.id)
-                usersAPI.follow(el.id)
-                    .then(response => {
-                        if (response.data.resultCode === 0) {
-                            props.follow(el.id)
-                        }
-                        props.toggleIsFollowingInProgress(false, el.id)
-                    })
+                dispatch(unfollowThunkCreator(el.id))
             }}>Follow</button>}
     </div>
 </span>
