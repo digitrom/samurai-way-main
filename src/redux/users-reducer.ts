@@ -174,3 +174,14 @@ export const getUserThunkCreator = (currentPage: number, pageSize: number) => {
             })
     }
 }
+
+// export const followThunkCreator = (userId: string) => {
+//     return (dispatch: Dispatch ) => {
+//         dispatch(toggleIsFetching(true))
+//         usersAPI.getUsers(currentPage, pageSize)
+//             .then(data => {
+//                 dispatch(setUsers(data.items))
+//                 dispatch(setTotalUsersCount(data.totalCount))
+//                 dispatch(toggleIsFetching(false))
+//             })
+//     }

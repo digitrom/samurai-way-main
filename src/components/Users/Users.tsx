@@ -4,6 +4,7 @@ import React from "react";
 import {toggleIsFollowingInProgress, UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType1 = {
     onPageChanged: (currentPage: number) => void
@@ -49,13 +50,8 @@ const Users = (props: UsersPropsType1) => {
         {el.followed
             ? <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
                 props.toggleIsFollowingInProgress(true, el.id)
-                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': 'bf9b2fdb-0844-4b4a-9eec-962dd771a951'
-                    }
-                },)
-                    .then(response => {
+                    usersAPI.unfollow(el.id)
+                        .then(response => {
                         if (response.data.resultCode === 0) {
                             props.unfollow(el.id)
                         }
@@ -64,12 +60,7 @@ const Users = (props: UsersPropsType1) => {
             }}>Unfollow</button>
             : <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
                 props.toggleIsFollowingInProgress(true, el.id)
-                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': 'bf9b2fdb-0844-4b4a-9eec-962dd771a951'
-                    }
-                })
+                usersAPI.follow(el.id)
                     .then(response => {
                         if (response.data.resultCode === 0) {
                             props.follow(el.id)
