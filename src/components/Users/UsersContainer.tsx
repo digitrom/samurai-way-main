@@ -1,15 +1,16 @@
 import React from "react";
-import {connect, useDispatch} from "react-redux";
+import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
     follow,
+    getUserThunkCreator,
     setCurrentPage,
-    unfollow,
-    toggleIsFollowingInProgress, getUserThunkCreator
+    toggleIsFollowingInProgress,
+    unfollow
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
-import {usersAPI, UserType} from "../../api/api";
+import {UserType} from "../../api/api";
 
 export type MapStateToPropsType = {
     users: UserType[]

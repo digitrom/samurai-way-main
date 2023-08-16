@@ -1,3 +1,6 @@
+import profile from "../components/Profile/Profile";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 export type ProfilePageType = {
     posts: Array<PostsType>
@@ -11,7 +14,7 @@ export type PostsType = {
 }
 
 export type ProfileType = {
-    photos: { small: string, large: string}
+    photos: { small: string, large: string }
 }
 
 export type InitialStateType = typeof initialState
@@ -87,4 +90,12 @@ export const setProfile = (profile: ProfileType) => {
             profile
         }
     } as const
+}
+
+export const getUserProfile = (userId: string | number) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(userId)
+        .then(response => {
+        // полученные данные из урла запрашиваем у сервера
+        dispatch(setProfile(response.data))
+    })
 }

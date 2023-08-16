@@ -77,8 +77,8 @@ export type AllACType = followACType
     | isFetchingACType
     | toggleIsFollowingInProgressACType
 
-type followACType = ReturnType<typeof follow>
-export const follow = (userId: string) => {
+type followACType = ReturnType<typeof followAC>
+export const followAC = (userId: string) => {
     return {
         type: 'FOLLOW',
         payload: {
@@ -87,8 +87,8 @@ export const follow = (userId: string) => {
     } as const
 }
 
-type unfollowACType = ReturnType<typeof unfollow>
-export const unfollow = (userId: string) => {
+type unfollowACType = ReturnType<typeof unfollowAC>
+export const unfollowAC = (userId: string) => {
     return {
         type: 'UNFOLLOW',
         payload: {
@@ -160,26 +160,26 @@ export const getUserThunkCreator = (currentPage: number, pageSize: number) => {
     }
 }
 
-export const followThunkCreator = (userId: string) => {
+export const follow = (userId: string) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingInProgress(true, userId))
         usersAPI.unfollow(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    dispatch(unfollow(userId))
+                    dispatch(unfollowAC(userId))
                 }
                 dispatch(toggleIsFollowingInProgress(false, userId))
             })
     }
 }
 
-export const unfollowThunkCreator = (userId: string) => {
+export const unfollow = (userId: string) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingInProgress(true, userId))
         usersAPI.follow(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    dispatch(follow(userId))
+                    dispatch(followAC(userId))
                 }
                 dispatch(toggleIsFollowingInProgress(false, userId))
             })

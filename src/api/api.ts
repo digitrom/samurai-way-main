@@ -16,10 +16,16 @@ export const usersAPI = {
             .then(response => response.data)
     },
     follow(userId: string) {
-        return instance.post<ResponseType<{data: UserType}>>(`follow/${userId}`)
+        return instance.post<ResponseType<{ data: UserType }>>(`follow/${userId}`)
     },
     unfollow(userId: string) {
         return instance.delete<ResponseType>(`follow/${userId}`)
+    },
+    getProfile(userId: string | number) {
+        return instance.get(`profile/` + userId)
+    },
+    me() {
+        return instance.get(`auth/me`)
     }
 
 }

@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+
 export type InitialStateType = {
     id: null | number
     login: null | string
@@ -38,4 +41,15 @@ export const setAuthUserData = (id: number, login: string, email: string, isAuth
         }
     } as const
 }
+
+export const getAuthMe = () => (dispatch: Dispatch) => {
+    usersAPI.me()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                let {id, login, email, isAuth} = response.data.data;
+                dispatch(setAuthUserData(id, login, email, isAuth))
+            }
+        })
+    }
+
 

@@ -2,14 +2,14 @@ import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user-128.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import {usersAPI, UserType} from "../../api/api";
-import {followThunkCreator, unfollowThunkCreator} from "../../redux/users-reducer";
+import {UserType} from "../../api/api";
 import {useDispatch} from "react-redux";
 import {UsersDispatchType} from "../../redux/redux-store";
+import {AnyAction, Dispatch} from "redux";
 
 type UsersPropsType1 = {
     onPageChanged: (currentPage: number) => void
-    follow: (userId: string) => void
+    follow: (userId: string)  => void
     unfollow: (userId: string) => void
     currentPage: number
     totalUsersCount: number
@@ -21,7 +21,7 @@ type UsersPropsType1 = {
 
 const Users = (props: UsersPropsType1) => {
 
-    const dispatch = useDispatch<UsersDispatchType>()
+    // const dispatch = useDispatch<UsersDispatchType>()
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
     let pages = []
@@ -52,10 +52,10 @@ const Users = (props: UsersPropsType1) => {
     <div>
         {el.followed
             ? <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
-        dispatch(followThunkCreator(el.id))
+                props.follow(el.id)
             }}>Unfollow</button>
             : <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
-                dispatch(unfollowThunkCreator(el.id))
+                props.unfollow(el.id)
             }}>Follow</button>}
     </div>
 </span>
