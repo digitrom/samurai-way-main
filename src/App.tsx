@@ -12,6 +12,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {store} from "./redux/redux-store";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import LoginPage from "./Login/Login";
 
 type PropsType = {
     // state: StateType
@@ -33,6 +34,7 @@ const App: React.FC<PropsType> = (props) => {
                 <Route path='/settings' component={Settings}/>
                 <Route path='/friends' render={() => <Friends state={state.sidebar}/>}/>
                 <Route path='/users' render={() => <UsersContainer/>}/>
+                <Route path='/login' render={() => <LoginPage/>}/>
             </div>
         </div>
     )
