@@ -30,7 +30,6 @@ class ProfileContainer extends React.Component<RouteComponentProps<RouteParams> 
     }
 
     render() {
-        return <Redirect to={'/login'}/>
         return (
             <Profile profile={this.props.profile}/>
         )
@@ -43,5 +42,10 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 })
 
 
-let WithUrlDteContainerComponent = withRouter(ProfileContainer)
+let AuthRedirectComponent = (props: RouteComponentProps<RouteParams> &ProfilePropsType) => {
+    if (!props.isAuth) return <Redirect to={'/login'}/>
+    return <ProfileContainer {...props}/>
+}
+
+let WithUrlDteContainerComponent = withRouter(AuthRedirectComponent)
 export default connect(mapStateToProps, {getUserProfile})(WithUrlDteContainerComponent);
