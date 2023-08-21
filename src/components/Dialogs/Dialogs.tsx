@@ -6,7 +6,7 @@ import {DialogsType, MessagesType} from "../../redux/dialogs-reducer";
 import {DialogsPropsType} from "./DialogsContainer"
 
 
-const Dialogs = (props: any) => {
+const Dialogs = (props:DialogsPropsType ) => {
 
     let state= props.dialogsPage
 

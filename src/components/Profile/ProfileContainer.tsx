@@ -10,9 +10,6 @@ import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 export type MapStateToPropsType = {
     profile: ProfileType | null
 }
-export type mapStateToPropsForRedirectType = {
-    isAuth: boolean | null
-}
 
 export type MapDispatchToPropsType = {
     getUserProfile: (userId: string | number) => void
@@ -43,9 +40,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
 })
 
-const mapStateToPropsForRedirect = (state: AppStateType): mapStateToPropsForRedirectType => ({
-    isAuth: state.auth.isAuth
-})
 
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
