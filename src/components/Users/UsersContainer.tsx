@@ -23,7 +23,6 @@ export type MapStateToPropsType = {
     isFetching: boolean
     followingInProgress: Array<string>
 }
-// const dispatch = useUsersDispatch();
 
 export type MapDispatchToPropsType = {
     follow: (userId: string) => void

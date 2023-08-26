@@ -3,7 +3,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfilePageType, ProfileType} from "../../redux/profile-reducer";
 import {Redirect} from "react-router-dom";
-import Status from "../Status";
+import ProfileStatus from "./ProfileInfo/ProfileStatus";
 
 type ProfilePropsType = {
     profile: ProfileType | null
