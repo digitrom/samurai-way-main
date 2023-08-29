@@ -22,12 +22,24 @@ export const usersAPI = {
         return instance.delete<ResponseType>(`follow/${userId}`)
     },
     getProfile(userId: string | number) {
-        return instance.get(`profile/` + userId)
+        console.warn('Obsolete method. Please, use profileAPI object')
+        return profileAPI.getProfile(userId)
     },
     me() {
         return instance.get(`auth/me`)
     }
+}
 
+export const profileAPI = {
+    getProfile(userId: string | number) {
+        return instance.get(`profile/` + userId)
+    },
+    getStatus(userId: string | number) {
+        return instance.get(`profile/status` + userId)
+    },
+    updateStatus(status: string) {
+        return instance.put<ResponseType<{data: StatusType}>>('profile/status', {status:status})
+    }
 }
 
 export type UserType = {
@@ -47,6 +59,10 @@ export type LocationType = {
 type PhotosType = {
     small: string
     large: string
+}
+
+type StatusType = {
+    status: string
 }
 
 
