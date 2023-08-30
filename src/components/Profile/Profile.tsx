@@ -1,18 +1,18 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {ProfilePageType, ProfileType} from "../../redux/profile-reducer";
-import {Redirect} from "react-router-dom";
-import ProfileStatus from "./ProfileInfo/ProfileStatus";
+import {ProfileStatusPropsType, ProfileType} from "../../redux/profile-reducer";
 
 type ProfilePropsType = {
     profile: ProfileType | null
+    status: string
+    updateProfileStatus: (status: ProfileStatusPropsType) => void
 }
 
-const Profile = (props :ProfilePropsType) => {
+const Profile = (props: ProfilePropsType) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateProfileStatus}/>
             <MyPostsContainer/>
         </div>
     );

@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from "axios";
+import {ProfileStatusPropsType} from "../redux/profile-reducer";
 
 
 const instance = axios.create({
@@ -37,8 +38,8 @@ export const profileAPI = {
     getStatus(userId: string | number) {
         return instance.get(`profile/status` + userId)
     },
-    updateStatus(status: string) {
-        return instance.put<ResponseType<{data: StatusType}>>('profile/status', {status:status})
+    updateStatus(status: ProfileStatusPropsType) {
+        return instance.put<ResponseType<{data: StatusType}>>(`profile/status`, status)
     }
 }
 

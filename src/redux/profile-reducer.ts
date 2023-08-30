@@ -1,6 +1,9 @@
-import profile from "../components/Profile/Profile";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+
+export type ProfileStatusPropsType = {
+    status: string
+}
 
 export type ProfilePageType = {
     posts: Array<PostsType>
@@ -122,11 +125,12 @@ export const setProfileStatus = (userId: string | number) => (dispatch: Dispatch
         })
 }
 
-export const updateProfileStatus = (status: string) => (dispatch: Dispatch) => {
+export const updateProfileStatus = (status: ProfileStatusPropsType) => (dispatch: Dispatch) => {
     profileAPI.updateStatus(status)
         .then(response => {
+            // debugger
             if (response.data.resultCode === 0) {
-                dispatch(setStatus(status))
+                dispatch(setStatus(status.status))
             }
         })
 }

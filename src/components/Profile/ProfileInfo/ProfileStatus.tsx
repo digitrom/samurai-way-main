@@ -33,30 +33,41 @@
 //     export default ProfileStatus
 
 
-import React from "react";
+import React, {ChangeEvent} from "react";
+import {ProfileStatusPropsType} from "../../../redux/profile-reducer";
 
-type ProfileStatusPropsType = {
-    status: string | null
+
+export type StatusPropsType = {
+    status: string
+    updateStatus: (status: ProfileStatusPropsType) => void
 }
 
-class ProfileStatus extends React.Component<ProfileStatusPropsType> {
+class ProfileStatus extends React.Component<StatusPropsType> {
 
 
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
-    activateEditMode =() => {
-        debugger
+    activateEditMode = () => {
         console.log('this:', this)
         this.setState({
             editMode: true
         })
     }
 
-    deactivateEditMode() {
+    deactivateEditMode = () => {
         this.setState({
             editMode: false
+        })
+        console.log(this.props)
+        this.props.updateStatus({status:this.state.status})
+    }
+
+    onStatusChange =(e:ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
         })
     }
 
@@ -65,12 +76,12 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
             <div>
                 {!this.state.editMode &&
                     <div>
-                        <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status}</span>
+                        <span onDoubleClick={this.activateEditMode}>{this.props.status || '--------'}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input autoFocus={true} onBlur={this.deactivateEditMode.bind(this)} value={this.props.status || ''} />
+                        <input autoFocus={true} onBlur={this.deactivateEditMode} onChange={this.onStatusChange} value={this.state.status}/>
                     </div>
                 }
             </div>
