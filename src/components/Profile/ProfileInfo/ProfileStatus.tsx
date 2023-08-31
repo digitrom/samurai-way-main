@@ -44,7 +44,6 @@ export type StatusPropsType = {
 
 class ProfileStatus extends React.Component<StatusPropsType> {
 
-
     state = {
         editMode: false,
         status: this.props.status
@@ -65,10 +64,18 @@ class ProfileStatus extends React.Component<StatusPropsType> {
         this.props.updateStatus({status:this.state.status})
     }
 
-    onStatusChange =(e:ChangeEvent<HTMLInputElement>) => {
+    onStatusChange(e:ChangeEvent<HTMLInputElement>) { // в function declaration, нужно забайндить this, так как нам нужен внешний this, а function declaration создает свой внутренний и внешний this потеряется
         this.setState({
             status: e.currentTarget.value
         })
+    }
+
+    componentDidUpdate(prevProps: any, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.status !== this.props.status){
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
@@ -81,7 +88,7 @@ class ProfileStatus extends React.Component<StatusPropsType> {
                 }
                 {this.state.editMode &&
                     <div>
-                        <input autoFocus={true} onBlur={this.deactivateEditMode} onChange={this.onStatusChange} value={this.state.status}/>
+                        <input autoFocus={true} onBlur={this.deactivateEditMode} onChange={this.onStatusChange.bind(this)} value={this.state.status}/>
                     </div>
                 }
             </div>

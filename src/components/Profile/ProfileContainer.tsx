@@ -6,7 +6,7 @@ import {
     getUserProfile,
     ProfileStatusPropsType,
     ProfileType,
-    setProfileStatus,
+    getProfileStatus,
     updateProfileStatus
 } from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -21,7 +21,7 @@ export type MapStateToPropsType = {
 
 export type MapDispatchToPropsType = {
     getUserProfile: (userId: string | number) => void
-    setProfileStatus: (userId: string | number) => void
+    getProfileStatus: (userId: string | number) => void
     updateProfileStatus: (status: ProfileStatusPropsType) => void
 }
 
@@ -37,7 +37,7 @@ class ProfileContainer extends React.Component<RouteComponentProps<RouteParams> 
         const {userId: id} = this.props.match.params // берем данные из урла через параметры функции withRouter
         let userId= id ? id : 2
         this.props.getUserProfile(userId)
-        this.props.setProfileStatus(userId)
+        // this.props.setProfileStatus(userId)
         this.props.updateProfileStatus({status:this.props.status})
     }
 
@@ -55,7 +55,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 export default compose<React.ComponentType>(
     withAuthRedirect,
-    connect(mapStateToProps, {getUserProfile, setProfileStatus, updateProfileStatus}),
+    connect(mapStateToProps, {getUserProfile, getProfileStatus, updateProfileStatus}),
     withRouter
 )(ProfileContainer)
 

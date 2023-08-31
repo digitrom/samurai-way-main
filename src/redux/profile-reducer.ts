@@ -22,7 +22,7 @@ export type ProfileType = {
 
 export type InitialStateType = typeof initialState
 
-let initialState = {
+    let initialState = {
     posts: [
         {
             id: 1,
@@ -118,7 +118,7 @@ export const getUserProfile = (userId: string | number) => (dispatch: Dispatch) 
             dispatch(setProfile(response.data))
         })
 }
-export const setProfileStatus = (userId: string | number) => (dispatch: Dispatch) => {
+export const getProfileStatus = (userId: string | number) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userId)
         .then(response => {
             dispatch(setStatus(response.data))

@@ -8,9 +8,9 @@ import {useDispatch} from "react-redux";
 import thunkMiddleware,{ThunkDispatch} from "redux-thunk";
 
 let rootReducer = combineReducers({
-    profilePage: profileReducer,
-    dialogsPage: dialogsReducer,
-    sidebar: sidebarReducer,
+    profilePage: profileReducer, // чтобы обратиться к status в initialState - profilePage.status
+    dialogsPage: dialogsReducer, // чтобы обратиться к profile  в initialState - profilePage.profile.
+    sidebar: sidebarReducer, //и т.д
     usersPage: usersReducer,
     auth: authReducer
     }
