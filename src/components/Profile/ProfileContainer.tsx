@@ -38,7 +38,7 @@ class ProfileContainer extends React.Component<RouteComponentProps<RouteParams> 
         let userId= id ? id : 2
         this.props.getUserProfile(userId)
         // this.props.setProfileStatus(userId)
-        this.props.updateProfileStatus({status:this.props.status})
+        this.props.getProfileStatus(userId)
     }
 
     render() {
