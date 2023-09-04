@@ -1,8 +1,12 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
-
-const LoginForm = (props: any) => {
+type FormDataType = {
+    login: string
+    password: string
+    rememberMe: boolean
+}
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: InjectedFormProps<FormDataType>) => {
 
     return (
         //внутри props.handleSubmit preventDefault() и props.onSubmit(fromData) - куда закидываем данные из  формы
@@ -23,13 +27,13 @@ const LoginForm = (props: any) => {
     )
 }
 
-const LoginReduxForm  = reduxForm({
+const LoginReduxForm  = reduxForm<FormDataType>({
     // a unique name for the form
     form: 'login'
 })(LoginForm)
 
-const Login = (props: any) => {
-    const onSubmit = (formData:any) => {
+const Login = () => {
+    const onSubmit = (formData:FormDataType) => {
         console.log(formData) //сообщает во внешний мир, что собрали данные
     }
     return <div>
