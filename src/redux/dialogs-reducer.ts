@@ -11,7 +11,6 @@ export type DialogsType = {
 export type DialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
-    newMessageText: string
 }
 
 let initialState = {
@@ -26,48 +25,30 @@ let initialState = {
         {id: 2, message: "How are You"},
         {id: 3, message: "Yo"}
     ] as Array<MessagesType>,
-    newMessageText: ""
 }
 
 export type InitialStateType = typeof initialState
 
-export const dialogsReducer = (state: InitialStateType = initialState, action: DialogsActionsTypes): InitialStateType => {
+export const dialogsReducer = (state: InitialStateType = initialState, action: addMessageACType): InitialStateType => {
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-TEXT":
-            return  {
-                ...state,
-                newMessageText: action.payload.newText
-            }
         case "ADD-MESSAGE":
-            let newMessage = state.newMessageText
+            let newMessage = action.payload.newMessageBody
             return {
                 ...state,
                 messages: [...state.messages, {id: 6, message: newMessage}],
-                newMessageText: ''
             }
         default:
             return state
     }
 }
 
-export type DialogsActionsTypes = addMessageACType | onMessageChangeACType
 
-
-type addMessageACType = ReturnType<typeof addMessageAC>
-export const addMessageAC = () => {
+export type addMessageACType = ReturnType<typeof addMessageAC>
+export const addMessageAC = (newMessageBody: string) => {
     return {
         type: "ADD-MESSAGE",
         payload: {
-            newMessageText: ''
-        }
-    } as const
-}
-type onMessageChangeACType = ReturnType<typeof onMessageChangeAC>
-export const onMessageChangeAC = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-TEXT",
-        payload: {
-            newText: newText
+            newMessageBody
         }
     } as const
 }

@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
@@ -8,20 +8,35 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Redirect} from "react-router-dom";
 
 
+const AddMessageForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
+
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field  name={'newMessageBody'} placeholder={"Enter your message"} component={'textarea'}/>
+            <div>
+                <button>Add message</button>
+            </div>
+        </form>
+    )
+}
+
+const AddMessageFormRedux= reduxForm<FormDataType>({
+    form: 'dialogAddMessageForm'
+})(AddMessageForm)
+
+
 const Dialogs = (props: DialogsPropsType) => {
+    debugger
 
     let state = props.dialogsPage
-
     let dialogElements = state.dialogs.map((d: DialogsType) => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messageElements = state.messages.map((m: MessagesType) => <Message key={m.id} message={m.message}/>)
-    let newMessageText = state.newMessageText
 
-    let addMessage = () => {
-        // props.addMessage()
-        alert('sdsds')
+    let onSubmit = (formData: FormDataType) => {
+        props.addMessage(formData.newMessageBody)
+
     }
-
-    // if (!props.isAuth) return <Redirect to={'/login'}/>
+    if (!props.isAuth) return <Redirect to={'/login'}/>
 
 
     return (
@@ -35,39 +50,17 @@ const Dialogs = (props: DialogsPropsType) => {
             </div>
             <AddMessageFormRedux
                 // onMessageChange={onMessageChange}
-                onSubmit={addMessage}
+                onSubmit={onSubmit}
                 // newMessageText={newMessageText}
-                // handleSubmit={handleSubmit}
             />
         </div>
     )
+
 }
 
-// type AddMessageFormPropsType = {
-//     onMessageChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-//     addMessage: () => void
-//     newMessageText: string
-//     handleSubmit: () => void
-// }
-const AddMessageForm:React.FC<InjectedFormProps<FormDataType>> = (props: InjectedFormProps<FormDataType>) => {
-
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <Field  component='textarea' name='newMessageBody' placeholder="Enter your message"/>
-            <div>
-                <button>Add message</button>
-            </div>
-        </form>
-    )
-}
 
 type FormDataType = {
-    dialogAddMessageForm: string
+    newMessageBody: string
 }
-
-
-const AddMessageFormRedux= reduxForm<FormDataType>({
-    form: 'dialogAddMessageForm'
-})(AddMessageForm)
 
 export default Dialogs

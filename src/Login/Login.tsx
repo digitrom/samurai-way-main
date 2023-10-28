@@ -6,7 +6,7 @@ type FormDataType = {
     password: string
     rememberMe: boolean
 }
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: InjectedFormProps<FormDataType>) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
     return (
         //внутри props.handleSubmit preventDefault() и props.onSubmit(fromData) - куда закидываем данные из  формы
@@ -34,6 +34,7 @@ const LoginReduxForm  = reduxForm<FormDataType>({
 
 const Login = () => {
     const onSubmit = (formData:FormDataType) => {
+        debugger
         console.log(formData) //сообщает во внешний мир, что собрали данные
     }
     return <div>
