@@ -3,9 +3,6 @@ import userPhoto from "../../assets/images/user-128.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
 import {UserType} from "../../api/api";
-import {useDispatch} from "react-redux";
-import {UsersDispatchType} from "../../redux/redux-store";
-import {AnyAction, Dispatch} from "redux";
 
 type UsersPropsType1 = {
     onPageChanged: (currentPage: number) => void

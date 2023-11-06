@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {ProfileStatusPropsType} from "../redux/profile-reducer";
+import {FormDataType} from "../Login/Login";
 
 
 const instance = axios.create({
@@ -10,6 +11,17 @@ const instance = axios.create({
     }
 })
 
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
+    },
+    login(data:FormDataType){
+        return instance.post<null, AxiosResponse<ResponseType<{userId:number}>>, FormDataType>('auth/login', data)
+    },
+    logout(){
+        return instance.delete<ResponseType>(`auth/login`)
+    }
+}
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
@@ -26,9 +38,6 @@ export const usersAPI = {
         console.warn('Obsolete method. Please, use profileAPI object')
         return profileAPI.getProfile(userId)
     },
-    me() {
-        return instance.get(`auth/me`)
-    }
 }
 
 export const profileAPI = {
@@ -42,6 +51,13 @@ export const profileAPI = {
         return instance.put<ResponseType<{data: StatusType}>>(`profile/status`, status)
     }
 }
+
+// export type LoginParamsType = {
+//     email: string
+//     password: string
+//     rememberMe: boolean
+// }
+
 
 export type UserType = {
     id: string

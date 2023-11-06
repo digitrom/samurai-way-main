@@ -1,5 +1,6 @@
-import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {authAPI} from "../api/api";
+import {AppThunk} from "../redux/redux-store";
+import {FormDataType} from "../Login/Login";
 
 export type InitialStateType = {
     id: null | number
@@ -21,7 +22,6 @@ export const authReducer = (state: InitialStateType = initialState, action: setA
             return {
                 ...state,
                 ...action.payload,
-                isAuth:true
             }
         default:
             return state
@@ -30,7 +30,7 @@ export const authReducer = (state: InitialStateType = initialState, action: setA
 }
 
 type setAuthUserDataACType = ReturnType<typeof setAuthUserData>
-export const setAuthUserData = (id: number, login: string, email: string, isAuth: boolean) => {
+export const setAuthUserData = (id: null | number, login: null | string, email: null | string, isAuth: boolean) => {
     return {
         type: 'SET_USER_DATA',
         payload: {
@@ -42,14 +42,35 @@ export const setAuthUserData = (id: number, login: string, email: string, isAuth
     } as const
 }
 
-export const getAuthMe = () => (dispatch: Dispatch) => {
-    usersAPI.me()
+export const getAuthMe = ():AppThunk => (dispatch) => {
+    authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
-                let {id, login, email, isAuth} = response.data.data;
-                dispatch(setAuthUserData(id, login, email, isAuth))
+                let {id, login, email} = response.data.data;
+                dispatch(setAuthUserData(id, login, email, true))
             }
         })
-    }
+}
+
+export const login = (data: FormDataType):AppThunk => (dispatch) => {
+    // debugger
+    authAPI.login(data)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(getAuthMe())
+            }
+        })
+}
+
+export const logout = ():AppThunk => (dispatch) => {
+    authAPI.logout()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false))
+
+            }
+        })
+}
+
 
 

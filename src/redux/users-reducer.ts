@@ -7,7 +7,6 @@
 
 import {usersAPI, UserType} from "../api/api";
 import {Dispatch} from "redux";
-import {UsersDispatchType} from "./redux-store";
 
 
 export type InitialStateType = {

@@ -2,11 +2,11 @@ import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
 import {sidebarReducer} from "./sidebar-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {profileReducer} from "./profile-reducer";
-import { usersReducer} from "./users-reducer";
+import {usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
+import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {reducer as formReducer} from 'redux-form'
 import {useDispatch} from "react-redux";
-import thunkMiddleware,{ThunkDispatch} from "redux-thunk";
-import { reducer as formReducer } from 'redux-form'
 
 let rootReducer = combineReducers({
     profilePage: profileReducer, // чтобы обратиться к status в initialState - profilePage.status
@@ -18,10 +18,15 @@ let rootReducer = combineReducers({
     }
 )
 
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AnyAction>
+
+export type AppDispatch = ThunkDispatch<AppStateType, unknown, AnyAction>
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+
 
 export type  AppStateType =  ReturnType <typeof rootReducer>
-export type UsersDispatchType = ThunkDispatch<AppStateType, unknown, AnyAction>
-// export const useUsersDispatch = useDispatch<AppDispatchType>;
+// export type UsersDispatchType = ThunkDispatch<AppStateType, unknown, AnyAction>
+// export const useUsersDispatch = () => useDispatch<UsersDispatchType>();
 export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 window.state= store

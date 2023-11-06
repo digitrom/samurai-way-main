@@ -5,7 +5,6 @@ import {Message} from "./Message/Message";
 import {DialogsType, MessagesType} from "../../redux/dialogs-reducer";
 import {DialogsPropsType} from "./DialogsContainer"
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Redirect} from "react-router-dom";
 import {Textarea} from "../common/formsControl/Textarea";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 
