@@ -1,6 +1,7 @@
 import {authAPI} from "../api/api";
 import {AppThunk} from "../redux/redux-store";
 import {FormDataType} from "../Login/Login";
+import {stopSubmit} from "redux-form";
 
 export type InitialStateType = {
     id: null | number
@@ -54,10 +55,14 @@ export const getAuthMe = ():AppThunk => (dispatch) => {
 
 export const login = (data: FormDataType):AppThunk => (dispatch) => {
     // debugger
+
     authAPI.login(data)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuthMe())
+            }else {
+                const message = response.data.messages.length > 0 ? response.data.messages[0] : 'seome error'
+                dispatch(stopSubmit('login', {_error:message}))
             }
         })
 }
