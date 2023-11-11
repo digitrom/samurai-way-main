@@ -7,6 +7,7 @@ import {authReducer} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
 import {useDispatch} from "react-redux";
+import appReducer from "./app-reducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer, // чтобы обратиться к status в initialState - profilePage.status
@@ -14,7 +15,8 @@ let rootReducer = combineReducers({
     sidebar: sidebarReducer, //и т.д
     usersPage: usersReducer,
     auth: authReducer,
-    form:formReducer
+    form:formReducer,
+    app: appReducer
     }
 )
 

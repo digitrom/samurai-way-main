@@ -13,8 +13,9 @@ import {AppStateType, store} from "./redux/redux-store";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./Login/Login";
 import {connect} from "react-redux";
-import {getAuthMe} from "./redux/auth-reducer";
 import {compose} from "redux";
+import {initializeApp} from "./redux/app-reducer";
+import Preloader from "./components/common/preloader/Preloader";
 
 type PropsType = {
     // state: StateType
@@ -23,21 +24,24 @@ type PropsType = {
 }
 
 export type MapStateToPropsType = {
-    isAuth: boolean
+  isInitialized: boolean
 }
 
 export type MapDispatchToPropsType = {
-    getAuthMe: () => void
+    initializeApp: () => void
 }
 
 export type AuthPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class App extends React.Component<AuthPropsType> {
     componentDidMount() {
-        this.props.getAuthMe()
+        this.props.initializeApp()
     }
     render() {
-        const state = store.getState()
+        // const state = store.getState()
+        if(!this.props.isInitialized){
+            <Preloader/>
+        }
         return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
@@ -59,11 +63,10 @@ class App extends React.Component<AuthPropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        isAuth: state.auth.isAuth}
+       isInitialized: state.app.isInitialized}
 }
 
 export default compose(
     withRouter,
-    connect(null, {getAuthMe}))
-    (App);
+    connect(mapStateToProps, {initializeApp}))(App);
 
