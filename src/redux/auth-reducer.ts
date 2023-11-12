@@ -32,6 +32,7 @@ export const authReducer = (state: InitialStateType = initialState, action: setA
 
 type setAuthUserDataACType = ReturnType<typeof setAuthUserData>
 export const setAuthUserData = (id: null | number, login: null | string, email: null | string, isAuth: boolean) => {
+    //debugger
     return {
         type: 'SET_USER_DATA',
         payload: {
@@ -44,8 +45,10 @@ export const setAuthUserData = (id: null | number, login: null | string, email: 
 }
 
 export const getAuthMe = ():AppThunk => (dispatch) => {
-    authAPI.me()
+    // debugger
+     return authAPI.me()
         .then(response => {
+            //debugger
             if (response.data.resultCode === 0) {
                 let {id, login, email} = response.data.data;
                 dispatch(setAuthUserData(id, login, email, true))

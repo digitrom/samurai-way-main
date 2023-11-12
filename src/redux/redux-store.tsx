@@ -31,5 +31,6 @@ export type  AppStateType =  ReturnType <typeof rootReducer>
 // export const useUsersDispatch = () => useDispatch<UsersDispatchType>();
 export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
-window.state= store
+// @ts-ignore
+window.store = store
 

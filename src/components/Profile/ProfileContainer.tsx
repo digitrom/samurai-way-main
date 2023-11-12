@@ -31,12 +31,17 @@ export type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType
 
 
 // const dispatch = useDispatch<UsersDispatchType>()
-class ProfileContainer extends React.Component<RouteComponentProps<string> & ProfilePropsType> {
+class ProfileContainer extends React.Component<RouteComponentProps<{userId:string}> & ProfilePropsType> {
     componentDidMount() {
-        let userId= this.props.match.params // берем данные из урла через параметры функции withRouter
+        //debugger
+        let userId= this.props.match.params.userId // берем данные из урла через параметры функции withRouter
+        console.log(userId)
         if(!userId && this.props.authorizedUserId) {
             userId = this.props.authorizedUserId+''
+            if(!userId) {this.props.history.push('/login')
+            }
         }
+        console.log(userId)
         this.props.getUserProfile(userId)
         this.props.getProfileStatus(userId)
     }

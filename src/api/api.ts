@@ -13,7 +13,11 @@ const instance = axios.create({
 
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`)
+        return instance.get<ResponseType<{
+            id: number
+            email: string
+            login: string
+        }>>(`auth/me`)
     },
     login(data:FormDataType){
         return instance.post<null, AxiosResponse<ResponseType<{userId:number}>>, FormDataType>('auth/login', data)

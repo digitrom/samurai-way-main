@@ -35,12 +35,14 @@ export type AuthPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class App extends React.Component<AuthPropsType> {
     componentDidMount() {
+       // debugger
         this.props.initializeApp()
     }
     render() {
-        // const state = store.getState()
+        const state = store.getState()
         if(!this.props.isInitialized){
-            <Preloader/>
+            console.log('hello world')
+            return <Preloader/>
         }
         return (
             <div className='app-wrapper'>
@@ -66,7 +68,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
        isInitialized: state.app.isInitialized}
 }
 
-export default compose(
+export default compose<React.ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp}))(App);
 

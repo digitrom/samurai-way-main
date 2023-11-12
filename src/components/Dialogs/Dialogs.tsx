@@ -7,6 +7,7 @@ import {DialogsPropsType} from "./DialogsContainer"
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../common/formsControl/Textarea";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {Redirect} from "react-router-dom";
 
 
 const maxLength100 =  maxLengthCreator(100)
