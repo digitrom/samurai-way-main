@@ -32,7 +32,7 @@ export const isInitializedAC = () => ({type: SET_INITIALIZED} as const)
 export const initializeApp = (): AppThunk => (dispatch) => {
     let promise = dispatch(getAuthMe())
     // console.log({ promise })
-   debugger
+   // debugger
     Promise.all([promise])
         .then(() => {
             // debugger
