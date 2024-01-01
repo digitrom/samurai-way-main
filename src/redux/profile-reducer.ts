@@ -96,26 +96,19 @@ export const setStatus = (status: string) => {
     } as const
 }
 
-export const getUserProfile = (userId: string | number) => (dispatch: Dispatch) => {
-    usersAPI.getProfile(userId)
-        .then(response => {
+export const getUserProfile = (userId: string | number) => async (dispatch: Dispatch) => {
+   let response =  await usersAPI.getProfile(userId)
             // полученные данные из урла запрашиваем у сервера
             dispatch(setProfile(response.data))
-        })
 }
-export const getProfileStatus = (userId: string | number) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
+export const getProfileStatus = (userId: string | number) => async (dispatch: Dispatch) => {
+   let response = await profileAPI.getStatus(userId)
             dispatch(setStatus(response.data))
-        })
 }
 
-export const updateProfileStatus = (status: ProfileStatusPropsType) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            // debugger
-            if (response.data.resultCode === 0) {
+export const updateProfileStatus = (status: ProfileStatusPropsType) => async (dispatch: Dispatch) => {
+  let response = await profileAPI.updateStatus(status)
+                if (response.data.resultCode === 0) {
                 dispatch(setStatus(status.status))
             }
-        })
 }

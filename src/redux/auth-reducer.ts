@@ -17,9 +17,11 @@ let initialState: InitialStateType = {
     isAuth: false
 }
 
+const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
+
 export const authReducer = (state: InitialStateType = initialState, action: setAuthUserDataACType): InitialStateType => {
     switch (action.type) {
-        case 'SET_USER_DATA':
+        case SET_USER_DATA:
             return {
                 ...state,
                 ...action.payload,
@@ -34,7 +36,7 @@ type setAuthUserDataACType = ReturnType<typeof setAuthUserData>
 export const setAuthUserData = (id: null | number, login: null | string, email: null | string, isAuth: boolean) => {
     //debugger
     return {
-        type: 'SET_USER_DATA',
+        type: SET_USER_DATA,
         payload: {
             id,
             login,
@@ -44,40 +46,33 @@ export const setAuthUserData = (id: null | number, login: null | string, email: 
     } as const
 }
 
-export const getAuthMe = ():AppThunk => (dispatch) => {
+export const getAuthMe = ():AppThunk => async (dispatch) => {
     // debugger
-     return authAPI.me()
-        .then(response => {
-            //debugger
+     let response = await authAPI.me()
             if (response.data.resultCode === 0) {
                 let {id, login, email} = response.data.data;
                 dispatch(setAuthUserData(id, login, email, true))
             }
-        })
 }
 
-export const login = (data: FormDataType):AppThunk => (dispatch) => {
+export const login = (data: FormDataType):AppThunk => async (dispatch) => {
     // debugger
 
-    authAPI.login(data)
-        .then(response => {
+  let response =  await  authAPI.login(data)
             if (response.data.resultCode === 0) {
                 dispatch(getAuthMe())
             }else {
                 const message = response.data.messages.length > 0 ? response.data.messages[0] : 'seome error'
                 dispatch(stopSubmit('login', {_error:message}))
             }
-        })
 }
 
-export const logout = ():AppThunk => (dispatch) => {
-    authAPI.logout()
-        .then(response => {
+export const logout = ():AppThunk => async (dispatch) => {
+   let response = await authAPI.logout()
             if (response.data.resultCode === 0) {
                 dispatch(setAuthUserData(null, null, null, false))
 
             }
-        })
 }
 
 
