@@ -8,14 +8,14 @@ type FormDataType = {
 }
 
 
-export const FormControl: React.FC<InjectedFormProps<FormDataType> & any> = ({input, meta, child, ...props}) => {
-    const hasError = meta.touched && meta.error
+export const FormControl: React.FC<InjectedFormProps<FormDataType> & any> = ({input, meta:{touched, error}, children}) => {
+    const hasError = touched && error
     return (
         <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
             <div>
-                {props.children}
+                {children}
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
 

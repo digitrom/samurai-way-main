@@ -3,6 +3,8 @@ import userPhoto from "../../assets/images/user-128.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
 import {UserType} from "../../api/api";
+import Paginator from "../common/Paginator/Paginator";
+
 
 type UsersPropsType1 = {
     onPageChanged: (currentPage: number) => void
@@ -16,27 +18,14 @@ type UsersPropsType1 = {
     followingInProgress: Array<string>
 }
 
-const Users = (props: UsersPropsType1) => {
+const Users = (props:UsersPropsType1) => {
 
     // const dispatch = useDispatch<UsersDispatchType>()
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-
-    let pages = []
-
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
 
     return <div>
-        <div>
-            {pages.map(p => {
-                return <span className={props.currentPage === p ? styles.selectedPage : ''}
-                             onClick={(e) => {
-                                 props.onPageChanged(p)
-                             }}>{p}</span>
-                // <span className={true ? styles.selectedPage : ''}>{p}</span>
-            })}
-        </div>
+        <Paginator
+            currentPage={props.currentPage} onPageChanged={props.onPageChanged} totalUsersCount={props.totalUsersCount} pageSize={props.pageSize}
+        />
         {
             props.users.map(el => <div key={el.id}>
 <span>

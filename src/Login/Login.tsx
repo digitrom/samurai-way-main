@@ -31,15 +31,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
                 {/*       validate={[required, maxLength100]}*/}
                 {/*/>*/}
             {createField(null, 'password', Input,[required, maxLength100],{type: 'password'}, '' ) }
-            {createField(null, 'rememberMe', Input,[required, maxLength100],{type: 'password'}, 'remember me' ) }
-
-
-            <div>
-                <Field type="checkbox"
-                       name={'rememberMe'}
-                       component={Input}
-                />remember me
-            </div>
+            {createField(null, 'rememberMe', Input,[],{type: 'checkbox'}, 'remember me' ) }
             { error && <div className={style.formSummaryError}>{error}</div>}
             <div>
                 <button>Login</button>
