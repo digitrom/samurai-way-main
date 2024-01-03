@@ -1,7 +1,4 @@
-import styles from "./Users.module.css";
-import userPhoto from "../../assets/images/user-128.png";
 import React from "react";
-import {NavLink} from "react-router-dom";
 import {UserType} from "../../api/api";
 import Paginator from "../common/Paginator/Paginator";
 import User from "./User";
@@ -27,13 +24,13 @@ const Users = (props: UsersPropsType1) => {
             currentPage={props.currentPage} onPageChanged={props.onPageChanged} totalUsersCount={props.totalUsersCount}
             pageSize={props.pageSize}
         />
-        {
+        <div>{
             props.users.map(el => <User user={el}
                                         followingInProgress={props.followingInProgress}
                                         follow={props.follow}
-                                        unfollow={props.follow}
+                                        unfollow={props.unfollow}
                                         key={el.id}/>)
-        }
+        }</div>
     </div>
 
 }
