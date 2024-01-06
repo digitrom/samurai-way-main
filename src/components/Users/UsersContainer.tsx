@@ -40,11 +40,13 @@ export type MapDispatchToPropsType = {
 
 class UsersContainer extends React.Component<UsersPropsType, UserType> {
     componentDidMount() {
-        this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize)
+        const  {currentPage, pageSize} = this.props
+        this.props.getUserThunkCreator(currentPage, pageSize)
     }
 
     onPageChanged = (currentPage: number) => {
-    this.props.getUserThunkCreator(currentPage, this.props.pageSize)
+        const  {pageSize} = this.props
+    this.props.getUserThunkCreator(currentPage, pageSize)
     }
 
     render() {

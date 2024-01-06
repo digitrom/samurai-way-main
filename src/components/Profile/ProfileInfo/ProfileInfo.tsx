@@ -10,8 +10,8 @@ export type ProfileInfoPropsType = {
     updateStatus: (status:ProfileStatusPropsType) => void
 }
 
-const ProfileInfo = (props:ProfileInfoPropsType) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, updateStatus}:ProfileInfoPropsType) => {
+    if (!profile) {
         return <Preloader />
     }
     // debugger
@@ -21,9 +21,9 @@ const ProfileInfo = (props:ProfileInfoPropsType) => {
                 <img
                     src='https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg'/>
             </div>
-            <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
+            <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large}/>
+                <img src={profile.photos.large}/>
                 ava + description
             </div>
         </div>
