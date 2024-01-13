@@ -32,7 +32,7 @@ export type InitialStateType = {
 let initialState: InitialStateType = {
     users: [],
     totalUsersCount: 0,
-    pageSize: 10,
+    pageSize: 5,
     currentPage: 5,
     isFetching: true
 }
